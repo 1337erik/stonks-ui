@@ -1,0 +1,22 @@
+{
+  "appName"  : "meta level",
+  "language" : "english",
+  "routes"   : {
+
+    "home"        : "home",
+    "coaching"    : "coach connect",
+    "thrivemind"  : "thrivemind",
+    "forums"      : "forums",
+    "billing"     : "billing",
+    "calibrate"   : "calibrate",
+    "backlog"     : "backlog",
+
+    "register"    : "register",
+    "profile"     : "profile",
+    "logout"      : "logout",
+    "login"       : "login"
+  },
+  "not_in_use" : "not in use",
+  "user"       : "user",
+  "search"     : "search"
+}

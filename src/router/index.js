@@ -1,30 +1,28 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import routes from "./routes";
+import store from "../store";
 
 Vue.use(VueRouter);
-
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
-];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach( ( to, from, next ) => {
+
+  if( !store.getters[ 'auth/isAuth' ] && to.meta.authGuard ){
+
+    store.dispatch( 'alerts/addMessage', { type: 'error', msg: 'Unauthenticated!' });
+    store.dispatch( 'auth/toggleLoginModal' );
+    next({ name: 'home' });
+  } else {
+
+    store.dispatch( 'alerts/addMessage', { type: 'success', msg: 'dude nice!' });
+    next();
+  }
 });
 
 export default router;

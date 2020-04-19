@@ -1,32 +1,115 @@
 <template>
+
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+
+    <topnav />
+
+    <!-- Alert Messages - see alerts.js and Message.vue -->
+    <div id="message-container">
+
+      <message v-for=" message in messages " :msg=" message " :key=" message.id "></message>
     </div>
-    <router-view />
+
+    <b-container id="main-container">
+
+      <transition name="slide-fade" mode="out-in">
+
+        <keep-alive>
+
+          <router-view />
+        </keep-alive>
+      </transition>
+    </b-container>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
+  import Topnav from './components/partials/Topnav';
+  import Message from './components/partials/Message';
+  import { mapGetters, mapActions } from 'vuex';
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  export default {
 
-    &.router-link-exact-active {
-      color: #42b983;
+    computed : {
+
+      ...mapGetters({
+
+        messages : 'alerts/messages'
+      })
+    },
+    methods : {
+
+      ...mapActions({
+
+        initMessagesFromStorage : 'alerts/initMessagesFromStorage',
+        flashMessage : 'alerts/flashMessage'
+      })
+    },
+    mounted(){
+
+      // load local storage messages
+      this.initMessagesFromStorage();
+    },
+    components : {
+
+      Topnav,
+      Message
     }
   }
-}
+</script>
+
+<style lang="scss">
+
+  html, body, #app {
+
+    height: 100vh;
+    width: 100vw;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+    padding: 0;
+    margin: 0;
+  }
+
+  #message-container {
+
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 65px;
+    right: 15px;
+  }
+
+  #main-container {
+
+    padding-top: 65px;
+  }
+
+  /** ******************************************* **/
+  /* Enter and leave animations can use different */
+  /* durations and timing functions. */
+  .slide-fade-enter-active {
+
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+
+    transition: all .6s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter {
+
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+
+  .slide-fade-leave-to {
+
+    transform: translateX(10px);
+    opacity: 0;
+  }
+  /** ******************************************* **/
+
+
 </style>
