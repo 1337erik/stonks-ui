@@ -6,7 +6,7 @@ export default {
     namespaced : true,
     state : {
 
-        error               : null,
+        errors              : null,
         isAuth              : !!parseInt( localStorage.getItem( 'isAuth' ) || 0 ),
         loginModalActive    : false,
         registerModalActive : false,
@@ -15,7 +15,7 @@ export default {
 
         toggleLoginModal    : state => state.loginModalActive = !state.loginModalActive,
         toggleRegisterModal : state => state.registerModalActive = !state.registerModalActive,
-        setError            : ( state, error ) => state.error = error,
+        setErrors           : ( state, errors ) => state.errors = errors,
         setAuth( state, val ){
 
             state.isAuth = !!val;
@@ -26,21 +26,37 @@ export default {
 
         toggleLoginModal( ctx ){
 
-            ctx.commit( 'setError', null );
+            ctx.commit( 'setErrors', null );
             ctx.commit( 'toggleLoginModal' );
         },
         toggleRegisterModal( ctx ){
 
-            ctx.commit( 'setError', null );
+            ctx.commit( 'setErrors', null );
             ctx.commit( 'toggleRegisterModal' );
         },
         setAuth( ctx, val ){
 
             ctx.commit( 'setAuth', val );
         },
+        register( ctx, data ){
+
+            ctx.commit( 'setErrors', null );
+            axios.post( '/register', data )
+                .then( () => {
+
+                    ctx.commit( 'setAuth', 1 );
+                    ctx.dispatch( 'alerts/addMessage', { type: 'success', msg: 'Welcome to MetaLevel!'}, { root: true });
+                    ctx.commit( 'toggleRegisterModal' );
+                })
+                .catch( err => {
+
+                    ctx.commit( 'setAuth', 0 );
+                    if( err.response.status == 422 ) ctx.commit( 'setErrors', err.response.data.errors );
+                });
+        },
         login( ctx, data ){
 
-            ctx.commit( 'setError', null );
+            ctx.commit( 'setErrors', null );
             axios.post( '/login', data )
                 .then( () => {
 
@@ -49,11 +65,9 @@ export default {
                     ctx.commit( 'toggleLoginModal' );
                 })
                 .catch( err => {
-                    // TODO => will have to see if other error statuses come to play.. and how to play with them.. later
-                    // maybe they get caught in the interceptors? like.. not even sure what else could happen.. fuck
 
                     ctx.commit( 'setAuth', 0 );
-                    if( err.response.status == 422 ) ctx.commit( 'setError', err.response.data.message );
+                    if( err.response.status == 422 ) ctx.commit( 'setErrors', err.response.data.errors );
                 });
         },
         logout( ctx ){
@@ -75,6 +89,6 @@ export default {
         isAuth              : state => state.isAuth,
         loginModalActive    : state => state.loginModalActive,
         registerModalActive : state => state.registerModalActive,
-        error               : state => state.error
+        errors              : state => state.errors
     }
 }

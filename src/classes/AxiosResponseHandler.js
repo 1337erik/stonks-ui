@@ -69,7 +69,7 @@ class AxiosResponseHandler {
 
   hasRedirect() {
     if (!this.redirects) {
-      console.log("redirects disabled");
+      // console.log("redirects disabled");
       return false;
     }
 

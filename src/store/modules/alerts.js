@@ -58,7 +58,7 @@ export default {
             let messages = await ctx.dispatch( 'getLocalMessages' );
             for( let item of messages ){
 
-                console.log( 'Local Storage Item Found: ', item );
+                // console.log( 'Local Storage Item Found: ', item );
                 ctx.commit( 'addMessage', { type: item.type, msg: item.message });
             }
             localStorage.removeItem( ctx.state.flashKey );

@@ -11,10 +11,29 @@
         <b-form @submit.prevent=" attemptRegister ">
 
             <b-form-group
-                id="register-input-group-1"
-                label="Email address:"
+                id="register-name"
+                label="Your Name:"
+                label-for="register-name"
+                description="Full name, fake name, I honestly don't care."
+                :invalid-feedback=" nameFeedback "
+                :state=" nameValid ">
+
+                <b-form-input
+                    id="register-name"
+                    v-model="form.name"
+                    type="text"
+                    required
+                    placeholder="Enter name">
+                </b-form-input>
+            </b-form-group>
+
+            <b-form-group
+                id="register-email"
+                label="Email Address:"
                 label-for="register-email"
-                description="We'll never share or sell your data. Suck it Zuckerburg.">
+                description="I'll never share or sell your data. Suck it Zuckerburg."
+                :invalid-feedback=" emailFeedback "
+                :state=" emailValid ">
 
                 <b-form-input
                     id="register-email"
@@ -25,7 +44,12 @@
                 </b-form-input>
             </b-form-group>
 
-            <b-form-group id="register-input-group-2" label="Your Password:" label-for="register-password">
+            <b-form-group
+                id="register-password"
+                label="Your Password:"
+                label-for="register-password"
+                :invalid-feedback=" passwordFeedback "
+                :state=" passwordValid ">
 
                 <b-form-input
                     id="register-password"
@@ -36,23 +60,23 @@
                 </b-form-input>
             </b-form-group>
 
-            <b-form-group id="register-input-group-3" label="Confirm Password:" label-for="register-password-confirm">
+            <b-form-group
+                id="register-password-confirmation"
+                label="Confirm Password:"
+                label-for="register-password-confirmation"
+                :invalid-feedback=" passwordConfirmationFeedback "
+                :state=" passwordConfirmationValid ">
 
                 <b-form-input
-                    id="register-password-confirm"
+                    id="register-password-confirmation"
                     type="password"
-                    v-model=" form.passwordConfirm "
+                    v-model=" form.password_confirmation "
                     required
                     placeholder="Confirm Password">
                 </b-form-input>
             </b-form-group>
 
             <div class="d-flex justify-content-end mt-4">
-
-                <transition mode="out-in" name="slide-fade">
-
-                    <p v-if=" error " class="error-msg">{{ error }}</p>
-                </transition>
 
                 <b-button type="button" variant="default" @click=" toggleRegisterModal ">Cancel</b-button>
                 <b-button type="submit" variant="primary" class="ml-2">Submit</b-button>
@@ -73,8 +97,10 @@
 
                 form : {
 
-                    email    : "",
-                    password : ""
+                    name                  : "",
+                    email                 : "",
+                    password              : "",
+                    password_confirmation : ""
                 }
             };
         },
@@ -83,7 +109,7 @@
             ...mapGetters({
 
                 registerModalActive : 'auth/registerModalActive',
-                error               : 'auth/error'
+                errors              : 'auth/errors'
             }),
             isOpen : {
 
@@ -95,18 +121,27 @@
 
                     this.toggleRegisterModal();
                 }
-            }
+            },
+            // TODO => this is fucking annoying.. I want to make a factory function but the bootstrap-vue component doesnt like having it's property-states being functions.. so here we are -.-
+            nameValid(){ return this.errors ? !Object.prototype.hasOwnProperty.call( this.errors, "name" ) : true; },
+            nameFeedback(){ return this.errors && Object.prototype.hasOwnProperty.call( this.errors, "name" ) ? this.errors[ 'name' ].join( ' ' ) : ''; },
+            emailValid(){ return this.errors ? !Object.prototype.hasOwnProperty.call( this.errors, "email" ) : true; },
+            emailFeedback(){ return this.errors && Object.prototype.hasOwnProperty.call( this.errors, "email" ) ? this.errors[ 'email' ].join( ' ' ) : ''; },
+            passwordValid(){ return this.errors ? !Object.prototype.hasOwnProperty.call( this.errors, "password" ) : true; },
+            passwordFeedback(){ return this.errors && Object.prototype.hasOwnProperty.call( this.errors, "password" ) ? this.errors[ 'password' ].join( ' ' ) : ''; },
+            passwordConfirmationValid(){ return this.errors ? !Object.prototype.hasOwnProperty.call( this.errors, "password_confirmation" ) : true; },
+            passwordConfirmationFeedback(){ return this.errors && Object.prototype.hasOwnProperty.call( this.errors, "password_confirmation" ) ? this.errors[ 'password_confirmation' ].join( ' ' ) : ''; }
         },
         methods: {
 
             ...mapActions({
 
                 toggleRegisterModal : 'auth/toggleRegisterModal',
-                register            : 'auth/register'
+                register            : 'auth/register',
             }),
             attemptRegister(){
 
-                this.register({ email: this.form.email, password: this.form.password });
+                this.register({ email: this.form.email, password: this.form.password, password_confirmation : this.form.password_confirmation, name: this.form.name });
             }
         }
     }

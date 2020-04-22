@@ -11,10 +11,11 @@
         <b-form @submit.prevent=" attemptLogin ">
 
             <b-form-group
-                id="login-input-group-1"
+                id="login-email"
                 label="Email address:"
                 label-for="login-email"
-                description="We'll never share or sell your data. Suck it Zuckerburg.">
+                :invalid-feedback=" emailFeedback "
+                :state=" emailValid ">
 
                 <b-form-input
                     id="login-email"
@@ -25,7 +26,12 @@
                 </b-form-input>
             </b-form-group>
 
-            <b-form-group id="login-input-group-2" label="Your Password:" label-for="login-password">
+            <b-form-group
+                id="login-input-group-2"
+                label="Your Password:"
+                label-for="login-password"
+                :invalid-feedback=" passwordFeedback "
+                :state=" passwordValid ">
 
                 <b-form-input
                     id="login-password"
@@ -37,11 +43,6 @@
             </b-form-group>
 
             <div class="d-flex justify-content-end mt-4">
-
-                <transition mode="out-in" name="slide-fade">
-
-                    <p v-if=" error " class="error-msg">{{ error }}</p>
-                </transition>
 
                 <b-button type="button" variant="default" @click=" toggleLoginModal ">Cancel</b-button>
                 <b-button type="submit" variant="primary" class="ml-2">Submit</b-button>
@@ -73,7 +74,7 @@
             ...mapGetters({
 
                 loginModalActive : 'auth/loginModalActive',
-                error            : 'auth/error'
+                errors           : 'auth/errors'
             }),
             isOpen : {
 
@@ -85,7 +86,12 @@
 
                     this.toggleLoginModal();
                 }
-            }
+            },
+            emailValid(){ return this.errors ? !Object.prototype.hasOwnProperty.call( this.errors, "email" ) : true; },
+            emailFeedback(){ return this.errors && Object.prototype.hasOwnProperty.call( this.errors, "email" ) ? this.errors[ 'email' ].join( ' ' ) : ''; },
+            passwordValid(){ return this.errors ? !Object.prototype.hasOwnProperty.call( this.errors, "password" ) : true; },
+            passwordFeedback(){ return this.errors && Object.prototype.hasOwnProperty.call( this.errors, "password" ) ? this.errors[ 'password' ].join( ' ' ) : ''; },
+
         },
         methods: {
 
