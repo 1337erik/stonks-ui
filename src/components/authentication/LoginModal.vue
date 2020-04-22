@@ -42,7 +42,9 @@
                 </b-form-input>
             </b-form-group>
 
-            <div class="d-flex justify-content-end mt-4">
+            <div class="d-flex justify-content-end mt-4 align-items-center">
+
+                <a class="pw-reset-link" :href=" pw_reset_link " target="_blank">Reset Password</a>
 
                 <b-button type="button" variant="default" @click=" toggleLoginModal ">Cancel</b-button>
                 <b-button type="submit" variant="primary" class="ml-2">Submit</b-button>
@@ -61,6 +63,7 @@
 
             return {
 
+                pw_reset_link : process.env.VUE_APP_API_BASE_URL + '/password/reset',
                 form : {
                     // TODO => clear these out lmfao
 
@@ -110,9 +113,8 @@
 
 <style scoped>
 
-    .error-msg {
+    .pw-reset-link {
 
-        color: red;
         margin: 0;
         position: absolute;
         left: 20px;

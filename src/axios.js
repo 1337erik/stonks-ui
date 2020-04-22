@@ -30,7 +30,6 @@ axios.interceptors.response.use(
     // Do something with response data
 
     console.log( 'the response after!', response );
-    store.dispatch( 'auth/setAuth', 1 ); // this is a fallback in case the sessio nremembers but the front-end doesnt
 
     return response;
   },
