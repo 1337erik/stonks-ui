@@ -5,10 +5,16 @@
     <topnav />
 
     <!-- Alert Messages - see alerts.js and Message.vue -->
-    <transition-group name="message-animation" tag="div" id="message-container">
+    <div id="message-outer-container">
 
-      <message v-for=" message in messages " :msg=" message " :key=" message.id "></message>
-    </transition-group>
+      <div id="message-inner-container">
+
+        <transition-group name="message-animation" tag="div" @before-leave=" beforeLeave " class="d-flex flex-column">
+
+          <message v-for=" message in messages " :msg=" message " :key=" message.id "></message>
+        </transition-group>
+      </div>
+    </div>
 
     <b-container id="main-container">
 
@@ -44,7 +50,15 @@
 
         initMessagesFromStorage : 'alerts/initMessagesFromStorage',
         flashMessage : 'alerts/flashMessage'
-      })
+      }),
+      beforeLeave( el ){
+
+        const { marginLeft, marginTop, width, height } = window.getComputedStyle( el );
+        el.style.left = `${el.offsetLeft - parseFloat( marginLeft, 10 )}px`;
+        el.style.top = `${el.offsetTop - parseFloat( marginTop, 10 )}px`;
+        el.style.width = width;
+        el.style.height = height;
+      }
     },
     mounted(){
 
@@ -74,13 +88,20 @@
     margin: 0;
   }
 
-  #message-container {
+  #message-outer-container {
 
-    display: flex;
-    flex-direction: column;
     position: absolute;
     top: 65px;
     right: 15px;
+    width: 55vw;
+    height: 100vh;
+    max-height: 60px;
+  }
+  #message-inner-container {
+
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
 
   #main-container {
@@ -111,15 +132,11 @@
     opacity: 0;
   }
 
-  .message-animation-enter {
-
-    opacity: 0;
-    transform: translateY( -25px );
-  }
+  .message-animation-enter,
   .message-animation-leave-to {
 
     opacity: 0;
-    transform: translateX( 25px );
+    transform: translateY( -25px );
   }
   .message-animation-leave-active {
 
@@ -127,7 +144,7 @@
   }
   .message-animation-move {
 
-    transition: all 0.9s ease;
+    transition: all 0.8s ease;
   }
   /** ******************************************* **/
 </style>
