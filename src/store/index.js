@@ -17,7 +17,7 @@ export default new Vuex.Store({
 
     topNavRoutes(){
 
-      return routes.filter( r => r.meta.onTopNav );
+      return routes.filter( r => r.meta && r.meta.onTopNav );
     }
   },
   modules: {

@@ -1,8 +1,8 @@
 <template>
 
-  <div :class="messageClass" role="alert" v-if="visible">
+  <div :class="messageClass" role="alert">
 
-    <button type="button" class="close" aria-label="Close" @click="dismiss()">
+    <button type="button" class="close" aria-label="Close" @click="dismiss( msg.id )">
       <span aria-hidden="true">&times;</span>
     </button>
 
@@ -16,6 +16,7 @@
 
   // TODO => have translator keep track of all the message statuses
   // TODO => somehow have the translator track all the messages as well..
+  import { mapActions } from 'vuex';
 
   export default {
 
@@ -25,8 +26,7 @@
 
       return {
 
-        visible: true
-      };
+      }
     },
 
     mounted() {
@@ -34,21 +34,20 @@
       var message = this;
       setTimeout(function() {
 
-        message.dismiss();
+        message.dismiss( message.msg.id );
       }, 5000 );
     },
 
     methods: {
 
+      ...mapActions({
+
+        dismiss : 'alerts/dismiss'
+      }),
       classFromType(type) {
 
         if (type === "error") return "danger";
         return type;
-      },
-
-      dismiss() {
-
-        this.visible = false;
       }
     },
 
@@ -66,9 +65,10 @@
 
   .message-container {
 
-    position: relative;
+    display: inline-block;
     text-align: right;
     margin-left: auto;
+    min-width: 240px;
   }
 
   p {

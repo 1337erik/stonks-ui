@@ -5,10 +5,10 @@
     <topnav />
 
     <!-- Alert Messages - see alerts.js and Message.vue -->
-    <div id="message-container">
+    <transition-group name="message-animation" tag="div" id="message-container">
 
       <message v-for=" message in messages " :msg=" message " :key=" message.id "></message>
-    </div>
+    </transition-group>
 
     <b-container id="main-container">
 
@@ -90,6 +90,7 @@
   /** ******************************************* **/
   /* Enter and leave animations can use different */
   /* durations and timing functions. */
+
   .slide-fade-enter-active {
 
     transition: all .3s ease;
@@ -103,13 +104,29 @@
     transform: translateX(-10px);
     opacity: 0;
   }
-
   .slide-fade-leave-to {
 
-    transform: translateX(10px);
+    transform: translateX( 10px );
     opacity: 0;
   }
+
+  .message-animation-enter {
+
+    opacity: 0;
+    transform: translateY( -25px );
+  }
+  .message-animation-leave-to {
+
+    opacity: 0;
+    transform: translateX( 25px );
+  }
+  .message-animation-leave-active {
+
+    position: absolute !important;
+  }
+  .message-animation-move {
+
+    transition: all 0.9s ease;
+  }
   /** ******************************************* **/
-
-
 </style>

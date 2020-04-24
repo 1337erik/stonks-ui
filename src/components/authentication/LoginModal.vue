@@ -65,10 +65,9 @@
 
                 pw_reset_link : process.env.VUE_APP_API_BASE_URL + '/password/reset',
                 form : {
-                    // TODO => clear these out lmfao
 
-                    email    : "erikpwhite@gmail.com",
-                    password : "password"
+                    email    : "",
+                    password : ""
                 }
             };
         },

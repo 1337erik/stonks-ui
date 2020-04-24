@@ -1,3 +1,5 @@
+import utilities from '@/utilities';
+
 export default {
 
     namespaced : true,
@@ -8,7 +10,12 @@ export default {
     },
     mutations : {
 
-        addMessage : ( state, message ) => state.messages.unshift( message )
+        addMessage : ( state, message ) => state.messages.unshift( message ),
+        removeMessage( state, id ){
+
+            const index = state.messages.findIndex( msg => msg.id == id );
+            state.messages.splice( index, 1 );
+        }
     },
     actions : {
 
@@ -20,8 +27,7 @@ export default {
          */
         addMessage( ctx, { type, msg }){
 
-            let count = ctx.getters.count;
-            ctx.commit( 'addMessage', { id: count++, type, msg });
+            ctx.commit( 'addMessage', { id: utilities.uuidv4(), type, msg });
         },
 
         /**
@@ -62,6 +68,11 @@ export default {
                 ctx.commit( 'addMessage', { type: item.type, msg: item.message });
             }
             localStorage.removeItem( ctx.state.flashKey );
+        },
+
+        dismiss( ctx, id ){
+
+            ctx.commit( 'removeMessage', id );
         }
     },
     getters : {

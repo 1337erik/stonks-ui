@@ -34,6 +34,10 @@ export default [
       onTopNav  : true
     }
   },
+  {
+    path: '*',
+    component: () => import( /* webpackChunkName: "nothing" */ '../views/Nothing.vue' ),
+  }
   // {
   //   path: "/coaching",
   //   name: "coaching",

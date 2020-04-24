@@ -17,6 +17,7 @@
     </ul>
 
     <b-button variant="info" @click="fuckme">Hey niggg</b-button>
+    <b-button variant="info" @click="dothing">penile</b-button>
 
     <LoginModal />
     <RegisterModal />
@@ -37,8 +38,6 @@
 
       return {
 
-        email    : "erikpwhite@gmail.com",
-        password : "password"
       };
     },
     methods: {
@@ -54,6 +53,17 @@
 
             console.error( 'a user error', err );
         });
+      },
+      dothing(){
+
+        const num = Math.floor( Math.random() * 10 ) + 1;
+        let type;
+        if( num <= 2 ) type = 'error';
+        if( num > 2 && num <= 4 ) type = 'info';
+        if( num > 4 && num <= 6 ) type = 'default';
+        if( num > 6 && num <= 8 ) type = 'warning';
+        if( num > 8 && num <= 10 ) type = 'success';
+        this.$store.dispatch( 'alerts/addMessage', { type: type, msg: 'heyyy lmfao' });
       }
     },
     components: {
