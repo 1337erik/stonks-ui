@@ -16,9 +16,6 @@
       <li>Have testimonials</li>
     </ul>
 
-    <b-button variant="info" @click="fuckme">Hey niggg</b-button>
-    <b-button variant="info" @click="dothing">penile</b-button>
-
     <LoginModal />
     <RegisterModal />
   </div>
@@ -57,13 +54,25 @@
       dothing(){
 
         const num = Math.floor( Math.random() * 10 ) + 1;
+        let txt = [
+          'erik lipsum big titties',
+          'flat earther gory bus tragedy lip synching',
+          'penile transplants for research into devleopment of the species',
+          'noone was the wiser, crackheads are anonymous',
+          'fat jits',
+          'why would yo usay some thing so controvertial',
+          'the commericals are based upon truer fictions',
+          'thanos was framed',
+          'espom salts on the  wound would lick a tiger thicker',
+          'please police plead kneees weak bees treat screech liger and lions',
+        ];
         let type;
         if( num <= 2 ) type = 'error';
         if( num > 2 && num <= 4 ) type = 'info';
         if( num > 4 && num <= 6 ) type = 'default';
         if( num > 6 && num <= 8 ) type = 'warning';
         if( num > 8 && num <= 10 ) type = 'success';
-        this.$store.dispatch( 'alerts/addMessage', { type: type, msg: 'heyyy lmfao' });
+        this.$store.dispatch( 'alerts/addMessage', { type: type, msg: txt[ num - 1 ] });
       }
     },
     components: {

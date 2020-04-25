@@ -65,6 +65,7 @@
 
   .message-container {
 
+    position: relative;
     display: inline-block;
     text-align: right;
     margin-left: auto;
