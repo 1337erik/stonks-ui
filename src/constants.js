@@ -1,0 +1,8 @@
+export const CLAIM_SERVICE = {
+    HHA: 'HHA',
+    TELLUS: 'TELLUS',
+    CLEARINGHOUSE: 'CLEARINGHOUSE',
+    EMAIL: 'EMAIL',
+    FAX: 'FAX',
+    DIRECT_MAIL: 'DIRECT_MAIL',
+};

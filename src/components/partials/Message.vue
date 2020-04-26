@@ -31,11 +31,11 @@
 
     mounted() {
 
-      var message = this;
-      setTimeout(function() {
+      // var message = this;
+      // setTimeout(function() {
 
-        message.dismiss( message.msg.id );
-      }, 5000 );
+      //   message.dismiss( message.msg.id );
+      // }, 5000 );
     },
 
     methods: {
@@ -68,7 +68,6 @@
     position: relative;
     display: inline-block;
     text-align: right;
-    margin-left: auto;
     min-width: 240px;
   }
 

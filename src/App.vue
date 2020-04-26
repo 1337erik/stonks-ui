@@ -9,7 +9,7 @@
 
       <div id="message-inner-container">
 
-        <transition-group name="message-animation" tag="div" @before-leave=" beforeLeave " class="d-flex flex-column">
+        <transition-group name="message-animation" tag="div" @before-leave=" beforeLeave " class="d-flex flex-column align-items-end">
 
           <message v-for=" message in messages " :msg=" message " :key=" message.id "></message>
         </transition-group>
@@ -132,11 +132,15 @@
     opacity: 0;
   }
 
-  .message-animation-enter,
-  .message-animation-leave-to {
+  .message-animation-enter {
 
     opacity: 0;
     transform: translateY( -25px );
+  }
+  .message-animation-leave-to {
+
+    transform: translateY( 25px );
+    opacity: 0;
   }
   .message-animation-leave-active {
 
