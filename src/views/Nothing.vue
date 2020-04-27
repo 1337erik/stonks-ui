@@ -12,6 +12,8 @@
 
 <script>
 
+  // TODO => make this 404 better
+
   export default {
 
     name: "nothing",

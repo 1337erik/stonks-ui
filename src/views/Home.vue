@@ -2,22 +2,17 @@
 
   <div>
 
-    <h1>This is home nigga</h1>
-
-    <p>As the splash page, I should incorporate the elements that I just wrote down are good from my contemporaries</p>
-    <p>For instance:</p>
+    <p>No this wont be the splash page.. thats what the main site will be for.. this should just be the dashboard for the main app</p>
+    <p>things to see:</p>
     <ul>
 
-      <li>Employ minimalism</li>
-      <li>offer up front</li>
-      <li>Intro video</li>
-      <li>instantly viewable CTA</li>
-      <li>Unique value proposition</li>
-      <li>Have testimonials</li>
+      <li>daily mindfullness calibration</li>
+      <li>the library of information</li>
+      <li>highlight the authorship program.. maybe a call-to-action</li>
+      <li>coach highlights? gather stats and data</li>
+      <li>relevant reads - maybe blog format, or videos too</li>
+      <li>personal profile</li>
     </ul>
-
-    <b-button variant="primary" class="mr-2" @click=" fuckme ">See User</b-button>
-    <b-button variant="primary" class="mr-2" @click=" dothing ">Spawn Note</b-button>
 
     <LoginModal />
     <RegisterModal />
@@ -31,8 +26,6 @@
   import LoginModal from "@/components/authentication/LoginModal";
   import RegisterModal from "@/components/authentication/RegisterModal";
 
-  import Form from '@/classes/Form';
-
   export default {
 
     name: "home",
@@ -44,42 +37,6 @@
     },
     methods: {
 
-      fuckme(){
-
-        let form = new Form();
-        form.get( '/api/penile' )
-        .then( res => {
-
-          console.log( 'user res: ', res );
-        })
-        .catch( err => {
-
-          console.error( 'a user error', err );
-        });
-      },
-      dothing(){
-
-        const num = Math.floor( Math.random() * 10 ) + 1;
-        let txt = [
-          'erik lipsum big titties',
-          'flat earther gory bus tragedy lip synching',
-          'penile transplants for research into devleopment of the species',
-          'noone was the wiser, crackheads are anonymous',
-          'fat jits',
-          'why would yo usay some thing so controvertial',
-          'the commericals are based upon truer fictions',
-          'thanos was framed',
-          'espom salts on the  wound would lick a tiger thicker',
-          'please police plead kneees weak bees treat screech liger and lions',
-        ];
-        let type;
-        if( num <= 2 ) type = 'error';
-        if( num > 2 && num <= 4 ) type = 'info';
-        if( num > 4 && num <= 6 ) type = 'default';
-        if( num > 6 && num <= 8 ) type = 'warning';
-        if( num > 8 && num <= 10 ) type = 'success';
-        this.$store.dispatch( 'alerts/addMessage', { type: type, msg: txt[ num - 1 ] });
-      }
     },
     components: {
 
