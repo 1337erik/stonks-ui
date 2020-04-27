@@ -76,10 +76,24 @@
                 </b-form-input>
             </b-form-group>
 
+            <b-form-group
+                id="register-timezone"
+                label="Your Timezone:"
+                label-for="register-timezone"
+                :invalid-feedback=" timezoneFeedback "
+                :state=" timezoneValid ">
+
+                <b-select
+                    v-model=" form.timezone ">
+
+                    <b-form-select-option v-for=" ( timezone, key ) in timezones " :key=" key " :value=" timezone ">{{ timezone }}</b-form-select-option>
+                </b-select>
+            </b-form-group>
+
             <div class="d-flex justify-content-end mt-4">
 
                 <b-button type="button" variant="default" @click=" toggleRegisterModal ">Cancel</b-button>
-                <b-button type="submit" variant="primary" class="ml-2">Submit</b-button>
+                <b-button type="submit" variant="primary" class="ml-2">Register</b-button>
             </div>
         </b-form>
     </b-modal>
@@ -87,6 +101,7 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
+    import { TIMEZONES } from '@/constants';
 
     export default {
 
@@ -100,8 +115,10 @@
                     name                  : "",
                     email                 : "",
                     password              : "",
-                    password_confirmation : ""
-                }
+                    password_confirmation : "",
+                    timezone              : TIMEZONES.AMERICA_NEW_YORK
+                },
+                timezones : Object.values( TIMEZONES ).sort()
             };
         },
         computed: {
@@ -130,7 +147,9 @@
             passwordValid(){ return this.errors ? !Object.prototype.hasOwnProperty.call( this.errors, "password" ) : true; },
             passwordFeedback(){ return this.errors && Object.prototype.hasOwnProperty.call( this.errors, "password" ) ? this.errors[ 'password' ].join( ' ' ) : ''; },
             passwordConfirmationValid(){ return this.errors ? !Object.prototype.hasOwnProperty.call( this.errors, "password_confirmation" ) : true; },
-            passwordConfirmationFeedback(){ return this.errors && Object.prototype.hasOwnProperty.call( this.errors, "password_confirmation" ) ? this.errors[ 'password_confirmation' ].join( ' ' ) : ''; }
+            passwordConfirmationFeedback(){ return this.errors && Object.prototype.hasOwnProperty.call( this.errors, "password_confirmation" ) ? this.errors[ 'password_confirmation' ].join( ' ' ) : ''; },
+            timezoneValid(){ return this.errors ? !Object.prototype.hasOwnProperty.call( this.errors, "timezone" ) : true; },
+            timezoneFeedback(){ return this.errors && Object.prototype.hasOwnProperty.call( this.errors, "timezone" ) ? this.errors[ 'timezone' ].join( ' ' ) : ''; },
         },
         methods: {
 
@@ -141,7 +160,7 @@
             }),
             attemptRegister(){
 
-                this.register({ email: this.form.email, password: this.form.password, password_confirmation : this.form.password_confirmation, name: this.form.name });
+                this.register( this.form );
             }
         }
     }

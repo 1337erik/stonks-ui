@@ -64,7 +64,6 @@
 
       // load local storage messages
       this.initMessagesFromStorage();
-      console.log( process.env.NODE_ENV );
     },
     components : {
 
