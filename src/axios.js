@@ -53,6 +53,21 @@ axios.interceptors.response.use(
 
 // get CSRF session key
 axios.get( "/sanctum/csrf-cookie" )
+  .then( () => {
+
+    axios.get( '/api/user/' )
+      .then( res => {
+
+        store.dispatch( 'auth/setUser', res.data );
+        store.dispatch( 'alerts/addMessage', { type: 'info', msg: 'Welcome to MetaLevel' });
+        store.dispatch( 'auth/setAuth', 1 );
+      })
+      .catch( () => {
+
+        store.dispatch( 'auth/setUser' );
+        store.dispatch( 'auth/setAuth', 0 );
+      });
+  })
   .catch( err => {
 
     console.error( err );

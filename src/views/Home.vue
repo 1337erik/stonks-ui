@@ -16,6 +16,9 @@
       <li>Have testimonials</li>
     </ul>
 
+    <b-button variant="primary" class="mr-2" @click=" fuckme ">See User</b-button>
+    <b-button variant="primary" class="mr-2" @click=" dothing ">Spawn Note</b-button>
+
     <LoginModal />
     <RegisterModal />
   </div>

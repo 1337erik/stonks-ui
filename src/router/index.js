@@ -20,7 +20,6 @@ router.beforeEach( ( to, from, next ) => {
     next({ name: 'home' });
   } else {
 
-    store.dispatch( 'alerts/addMessage', { type: 'success', msg: 'dude nice!' });
     next();
   }
 });

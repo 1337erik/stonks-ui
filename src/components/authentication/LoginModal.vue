@@ -47,7 +47,7 @@
                 <a class="pw-reset-link" :href=" pw_reset_link " target="_blank">Reset Password</a>
 
                 <b-button type="button" variant="default" @click=" toggleLoginModal ">Cancel</b-button>
-                <b-button type="submit" variant="primary" class="ml-2">Submit</b-button>
+                <b-button type="submit" variant="primary" class="ml-2">Login</b-button>
             </div>
         </b-form>
     </b-modal>

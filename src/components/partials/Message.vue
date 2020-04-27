@@ -68,7 +68,6 @@
     position: relative;
     display: inline-block;
     text-align: right;
-    margin-left: auto;
     min-width: 240px;
   }
 
