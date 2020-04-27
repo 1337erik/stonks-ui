@@ -49,15 +49,19 @@ export default {
         },
         toggleRegisterModal( ctx ){
 
-            ctx.commit( 'setErrors', null );
-            ctx.commit( 'toggleRegisterModal' );
+            ctx.dispatch( 'alerts/addMessage', { type: 'error', msg: 'Registration is closed for the moment!' }, { root: true });
+            // ctx.commit( 'setErrors', null );
+            // ctx.commit( 'toggleRegisterModal' );
         },
         setAuth( ctx, val ){
 
             ctx.commit( 'setAuth', val );
         },
-        register( ctx, data ){
+        register( ctx ){
 
+            ctx.dispatch( 'alerts/addMessage', { type: 'error', msg: 'Registration is closed for the moment!' }, { root: true });
+            return;
+            /*
             ctx.commit( 'setErrors', null );
             axios.post( '/register', data )
                 .then( res => {
@@ -73,6 +77,7 @@ export default {
                     ctx.dispatch( 'alerts/addMessage', { type: 'error', msg: err.response.data.message }, { root: true });
                     if( err.response.status == 422 ) ctx.commit( 'setErrors', err.response.data.errors );
                 });
+                */
         },
         login( ctx, data ){
 
