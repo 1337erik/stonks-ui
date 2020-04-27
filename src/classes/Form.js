@@ -24,11 +24,6 @@ class Form {
     this.hasBeenSubmitted = false;
   }
 
-  disableRedirects() {
-    this.handler.redirects = false;
-    return this;
-  }
-
   /**
    * Disable error messages for the provided HTTP status code
    */

@@ -31,6 +31,8 @@
   import LoginModal from "@/components/authentication/LoginModal";
   import RegisterModal from "@/components/authentication/RegisterModal";
 
+  import Form from '@/classes/Form';
+
   export default {
 
     name: "home",
@@ -44,14 +46,15 @@
 
       fuckme(){
 
-        this.$http.get( '/api/user' )
+        let form = new Form();
+        form.get( '/api/penile' )
         .then( res => {
 
-            console.log( 'user res: ', res );
+          console.log( 'user res: ', res );
         })
         .catch( err => {
 
-            console.error( 'a user error', err );
+          console.error( 'a user error', err );
         });
       },
       dothing(){

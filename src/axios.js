@@ -51,7 +51,7 @@ axios.interceptors.response.use(
   }
 );
 
-// get CSRF session key
+// get CSRF session key & set auth status/current user
 axios.get( "/sanctum/csrf-cookie" )
   .then( () => {
 
