@@ -120,6 +120,7 @@ export default {
     },
     getters : {
 
+        user                : state => state.user,
         isAuth              : state => state.isAuth,
         loginModalActive    : state => state.loginModalActive,
         registerModalActive : state => state.registerModalActive,

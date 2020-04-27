@@ -1,4 +1,4 @@
-import router from "../router/index";
+// import router from "../router/index";
 import store from "../store/index";
 
 class AxiosResponseHandler {
@@ -6,16 +6,13 @@ class AxiosResponseHandler {
     this.error = {};
     this.formErrors = {};
     this.response = {};
-    this.redirects = true;
   }
 
   handleResponse(response, alert = true) {
     this.response = response;
-
+    console.log( this.getMessage() );
     if (alert && this.getMessage())
       this.handleAlert("success", this.getMessage());
-
-    if (this.hasRedirect()) this.handleRedirect();
   }
 
   handleError(error, alert = true, ignoreStatuses = []) {
@@ -43,14 +40,10 @@ class AxiosResponseHandler {
         this.handleAlert("error", "Please refresh and try again.");
       }
     }
-    if (this.hasRedirect()) this.handleRedirect();
   }
 
   handleAlert(type, message) {
-    if (this.hasRedirect()) {
-      store.dispatch( 'alerts/flashMessage', { type: type, msg: message });
-      return;
-    }
+
     store.dispatch( 'alerts/addMessage', { type: type, msg: message });
   }
 
@@ -65,21 +58,6 @@ class AxiosResponseHandler {
   getMessage() {
     let data = this.getResponseData();
     return data.message ? data.message : null;
-  }
-
-  hasRedirect() {
-    if (!this.redirects) {
-      // console.log("redirects disabled");
-      return false;
-    }
-
-    let data = this.getResponseData();
-    return Object.prototype.hasOwnProperty.call( data, "redirect" );
-  }
-
-  handleRedirect() {
-    let data = this.getResponseData();
-    router.push(data.redirect);
   }
 
   hasError() {

@@ -1,9 +1,7 @@
 // an example of how to branch out routes into sub-folders.. if needed
-// import authentication from "./modules/authentication";
+import authentication from "./modules/authentication";
 
-// export default authentication.concat([
-
-export default [
+export default authentication.concat([
   {
     path: "/",
     name: "home",
@@ -31,7 +29,7 @@ export default [
     meta: {
 
       authGuard : true,
-      onTopNav  : true
+      onTopNav  : false
     }
   },
   {
@@ -56,4 +54,4 @@ export default [
   //   // component: () => import( /* webpackChunkName: "knowledge" */ '../views/forums/index.vue' ),
   //   meta: {}
   // }
-];
+]);
