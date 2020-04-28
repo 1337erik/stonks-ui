@@ -14,6 +14,16 @@
       <li>personal profile</li>
     </ul>
 
+    <b-row>
+
+      <b-col>
+
+        <h1>Testing Echo : {{ i }}</h1>
+
+        <p v-for=" ( msg, i ) in msgs " :key=" i ">{{ msg }}</p>
+      </b-col>
+    </b-row>
+
     <LoginModal />
     <RegisterModal />
   </div>
@@ -25,6 +35,7 @@
 
   import LoginModal from "@/components/authentication/LoginModal";
   import RegisterModal from "@/components/authentication/RegisterModal";
+import { mapGetters } from 'vuex';
 
   export default {
 
@@ -33,10 +44,34 @@
 
       return {
 
+        i : 0,
+        msgs : []
       };
+    },
+    computed :{
+
+      ...mapGetters({
+
+        user : 'auth/user'
+      })
+    },
+    mounted(){
+
+      if( !this.user.id ) return;
+      this.$echo.private( 'metalevel_database_penile-transplants.' + this.user.id )
+        .listen( '.UserEvent', ( data ) => {
+
+          console.log( 'gottem!', data );
+          this.i++;
+          this.pushMsg( data.title );
+        })
     },
     methods: {
 
+      pushMsg( title ){
+
+        this.msgs.push( title );
+      }
     },
     components: {
 
