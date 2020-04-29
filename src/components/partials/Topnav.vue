@@ -1,6 +1,6 @@
 <template>
 
-  <b-navbar toggleable="md" type="light" variant="faded" fixed="top" id="nav">
+  <b-navbar toggleable="md" type="light" variant="faded" fixed="top" id="nav" :style=" topnavStyles ">
 
     <b-navbar-brand to="/" exact-active-class="">{{ $t( "appName" ) | capitalize }}</b-navbar-brand>
 
@@ -63,7 +63,8 @@
       ...mapGetters({
 
         isAuth       : "auth/isAuth",
-        topNavRoutes : "topNavRoutes"
+        topNavRoutes : "topNavRoutes",
+        topnavStyles : 'nav/topnavStyles'
       })
     }
   }
@@ -73,8 +74,12 @@
 
   #nav {
 
-    height: 60px;
     padding: 5px 15px;
+    box-shadow: 2px 0px 5px #ccc;
+    width: 100%;
+    position: fixed;
+    z-index: 888;
+    background-color: #fff;
 
     a {
 

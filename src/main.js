@@ -20,7 +20,7 @@ Vue.use(BootstrapVueIcons);
 
 Vue.config.productionTip = false;
 
-import "./echo";
+// import "./echo";
 
 new Vue({
 
