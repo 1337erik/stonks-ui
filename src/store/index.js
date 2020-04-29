@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 import auth from './modules/auth';
 import alerts from './modules/alerts';
+import nav from './modules/nav';
 
 import routes from '@/router/routes';
 
@@ -24,5 +25,6 @@ export default new Vuex.Store({
 
     auth,
     alerts,
+    nav,
   }
 });

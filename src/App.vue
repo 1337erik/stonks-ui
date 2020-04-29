@@ -4,36 +4,28 @@
 
     <topnav />
 
-    <!-- Alert Messages - see alerts.js and Message.vue -->
-    <div id="message-outer-container">
+    <sidenav />
 
-      <div id="message-inner-container">
+    <div id="main-app-container" :style=" appContainerStyles ">
 
-        <transition-group name="message-animation" tag="div" @before-leave=" beforeLeave " class="d-flex flex-column align-items-end">
+      <!-- Alert Messages - see alerts.js and Message.vue -->
+      <messages-container />
 
-          <message v-for=" message in messages " :msg=" message " :key=" message.id "></message>
-        </transition-group>
-      </div>
+      <main-app-container />
     </div>
 
-    <b-container id="main-container">
-
-      <transition name="slide-fade" mode="out-in">
-
-        <keep-alive>
-
-          <router-view />
-        </keep-alive>
-      </transition>
-    </b-container>
+    <Footer />
   </div>
 </template>
 
 <script>
 
   import Topnav from './components/partials/Topnav';
-  import Message from './components/partials/Message';
-  import { mapGetters, mapActions } from 'vuex';
+  import Sidenav from './components/partials/Sidenav';
+  import MessagesContainer from './components/partials/MessagesContainer';
+  import MainAppContainer from './components/partials/MainAppContainer';
+  import Footer from './components/partials/Footer';
+  import { mapGetters } from 'vuex';
 
   export default {
 
@@ -41,24 +33,11 @@
 
       ...mapGetters({
 
-        messages : 'alerts/messages'
+        appContainerStyles : 'nav/appContainerStyles',
       })
     },
     methods : {
 
-      ...mapActions({
-
-        initMessagesFromStorage : 'alerts/initMessagesFromStorage',
-        flashMessage : 'alerts/flashMessage'
-      }),
-      beforeLeave( el ){
-
-        const { marginLeft, marginTop, width, height } = window.getComputedStyle( el );
-        el.style.left = `${el.offsetLeft - parseFloat( marginLeft, 10 )}px`;
-        el.style.top = `${el.offsetTop - parseFloat( marginTop, 10 )}px`;
-        el.style.width = width;
-        el.style.height = height;
-      }
     },
     mounted(){
 
@@ -68,7 +47,10 @@
     components : {
 
       Topnav,
-      Message
+      Sidenav,
+      MessagesContainer,
+      MainAppContainer,
+      Footer,
     }
   }
 </script>
@@ -85,30 +67,18 @@
     color: #2c3e50;
     padding: 0;
     margin: 0;
+    background-color: #f3f6f9;
+    overflow-y: scroll;
   }
 
-  #message-outer-container {
+  #main-app-container {
 
-    position: absolute;
-    top: 65px;
-    right: 15px;
-    width: 55vw;
-    height: 100vh;
-    max-height: 60px;
-  }
-  #message-inner-container {
-
-    position: relative;
-    width: 100%;
     height: 100%;
-  }
-
-  #main-container {
-
-    padding-top: 65px;
+    overflow-y: scroll;
   }
 
   /** ******************************************* **/
+  /*            GLOBAL                            */
   /* Enter and leave animations can use different */
   /* durations and timing functions. */
 
@@ -129,25 +99,6 @@
 
     transform: translateX( 10px );
     opacity: 0;
-  }
-
-  .message-animation-enter {
-
-    opacity: 0;
-    transform: translateY( -25px );
-  }
-  .message-animation-leave-to {
-
-    transform: translateY( 25px );
-    opacity: 0;
-  }
-  .message-animation-leave-active {
-
-    position: absolute !important;
-  }
-  .message-animation-move {
-
-    transition: all 0.8s ease;
   }
   /** ******************************************* **/
 </style>
