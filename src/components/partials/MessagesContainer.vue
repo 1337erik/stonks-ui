@@ -1,6 +1,6 @@
 <template>
 
-    <div id="messages-outer-container" :style=" messagesContainerStyles ">
+    <div id="messages-outer-container" class="scrollyboi">
 
         <transition-group name="message-animation" tag="div" @before-leave=" beforeLeave " class="d-flex flex-column align-items-end" id="messages-inner-container">
 
@@ -48,16 +48,18 @@
     }
 </script>
 
-<style scoped>
-
+<style>
 
   #messages-outer-container {
 
     position: fixed;
     top: 0px;
     bottom: 0px;
-    overflow-y: scroll
+    right: 75px;
+    overflow-y: scroll;
+    z-index: 777;
   }
+
   #messages-inner-container {
 
     position: relative;
@@ -68,6 +70,7 @@
     opacity: 0;
     transform: translateY( -25px );
   }
+
   .message-animation-leave-to {
 
     transform: translateX( 25px );

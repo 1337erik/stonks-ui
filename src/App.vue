@@ -6,15 +6,10 @@
 
     <sidenav />
 
-    <div id="main-app-container" :style=" appContainerStyles ">
+    <!-- Alert Messages - see alerts.js and Message.vue -->
+    <messages-container />
 
-      <!-- Alert Messages - see alerts.js and Message.vue -->
-      <messages-container />
-
-      <main-app-container />
-    </div>
-
-    <Footer />
+    <main-app-container />
   </div>
 </template>
 
@@ -24,7 +19,6 @@
   import Sidenav from './components/partials/Sidenav';
   import MessagesContainer from './components/partials/MessagesContainer';
   import MainAppContainer from './components/partials/MainAppContainer';
-  import Footer from './components/partials/Footer';
   import { mapGetters } from 'vuex';
 
   export default {
@@ -50,7 +44,6 @@
       Sidenav,
       MessagesContainer,
       MainAppContainer,
-      Footer,
     }
   }
 </script>
@@ -59,8 +52,8 @@
 
   html, body, #app {
 
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -68,13 +61,7 @@
     padding: 0;
     margin: 0;
     background-color: #f3f6f9;
-    overflow-y: scroll;
-  }
-
-  #main-app-container {
-
-    height: 100%;
-    overflow-y: scroll;
+    position: relative;
   }
 
   /** ******************************************* **/
@@ -99,6 +86,21 @@
 
     transform: translateX( 10px );
     opacity: 0;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .scrollyboi::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE and Edge */
+  .scrollyboi {
+    -ms-overflow-style: none;
+  }
+
+  .sidenav-open {
+
+    padding-left: 300px !important;
   }
   /** ******************************************* **/
 </style>

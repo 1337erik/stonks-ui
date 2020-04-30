@@ -1,6 +1,6 @@
 <template>
 
-  <b-navbar toggleable="md" type="light" variant="faded" fixed="top" id="nav" :style=" topnavStyles ">
+  <b-navbar toggleable="md" type="light" variant="faded" fixed="top" id="nav" class="sidenav-open">
 
     <b-navbar-brand to="/" exact-active-class="">{{ $t( "appName" ) | capitalize }}</b-navbar-brand>
 
@@ -75,7 +75,7 @@
   #nav {
 
     padding: 5px 15px;
-    box-shadow: 2px 0px 5px #ccc;
+    box-shadow: 0px 0px 5px 5px rgba( 0, 0, 0, 0.2 );
     width: 100%;
     position: fixed;
     z-index: 888;
@@ -91,5 +91,10 @@
         color: #007bff;
       }
     }
+  }
+
+  .sidenav-open {
+
+
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
 
-    <aside class="sidenav" :style=" sidenavStyles ">
+    <aside class="sidenav scrollyboi sidenav-open">
 
       testing this
     </aside>
@@ -41,12 +41,19 @@
 
 <style lang="scss" scoped>
 
-    .sidenav {
+  .sidenav {
 
-        height: 100vh;
-        position: fixed;
-        background-color: white;
-        box-shadow: 0px 2px 5px #ccc;
-        z-index: 999;
-    }
+    height: 100%;
+    position: fixed;
+    background-color: white;
+    box-shadow: 0px 2px 5px #ccc;
+    z-index: 999;
+    overflow-y: scroll;
+  }
+
+  .sidenav-open {
+
+    width: 275px;
+    padding-left: 0px !important;
+  }
 </style>

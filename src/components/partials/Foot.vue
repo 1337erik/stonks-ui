@@ -1,6 +1,6 @@
 <template>
 
-    <div id="footer" :style=" footerStyles ">
+    <div id="footer" class="sidenav-open">
 
         fuck yeah
     </div>
@@ -31,6 +31,9 @@
         left:0;
         right:0;
         height: 75px;
-        width: 100%;
+        z-index: 666;
+
+        background-color: white;
+        box-shadow: 0px 2px 10px 2px rgba( 0, 0, 0, 0.2 );
     }
 </style>
