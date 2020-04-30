@@ -1,6 +1,6 @@
 <template>
 
-    <div id="footer" class="sidenav-open">
+    <div id="footer" :class=" sidenavClass ">
 
         fuck yeah
     </div>
@@ -16,7 +16,7 @@
 
             ...mapGetters({
 
-                footerStyles : 'nav/footerStyles'
+                sidenavClass : 'nav/sidenavClass',
             })
         }
     }

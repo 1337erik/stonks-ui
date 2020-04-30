@@ -10,6 +10,9 @@
     <messages-container />
 
     <main-app-container />
+
+    <LoginModal />
+    <RegisterModal />
   </div>
 </template>
 
@@ -19,6 +22,8 @@
   import Sidenav from './components/partials/Sidenav';
   import MessagesContainer from './components/partials/MessagesContainer';
   import MainAppContainer from './components/partials/MainAppContainer';
+  import LoginModal from "@/components/authentication/LoginModal";
+  import RegisterModal from "@/components/authentication/RegisterModal";
   import { mapGetters } from 'vuex';
 
   export default {
@@ -27,7 +32,6 @@
 
       ...mapGetters({
 
-        appContainerStyles : 'nav/appContainerStyles',
       })
     },
     methods : {
@@ -35,8 +39,6 @@
     },
     mounted(){
 
-      // load local storage messages
-      this.initMessagesFromStorage();
     },
     components : {
 
@@ -44,11 +46,16 @@
       Sidenav,
       MessagesContainer,
       MainAppContainer,
+      LoginModal,
+      RegisterModal
     }
   }
 </script>
 
 <style lang="scss">
+
+  // @ is an alias to /src
+  // import HelloWorld from "@/components/HelloWorld.vue";
 
   html, body, #app {
 
@@ -98,9 +105,38 @@
     -ms-overflow-style: none;
   }
 
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+  }
+
+  // global class for the components that slide when the sidenav toggles
+  .unified-transition-class {
+
+    transition: all 0.3s ease;
+  }
+
   .sidenav-open {
 
-    padding-left: 300px !important;
+    padding-left: 285px !important;
+  }
+
+  .sidenav-closed {
+
+    padding-left: 95px !important;
+  }
+
+  @media only screen and ( max-width: 768px ){
+
+    .sidenav-closed {
+
+      padding-left: 15px !important;
+    }
   }
   /** ******************************************* **/
 </style>

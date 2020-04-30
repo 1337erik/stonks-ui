@@ -1,6 +1,6 @@
 <template>
 
-    <aside class="sidenav scrollyboi sidenav-open">
+    <aside id="sidenav-container" :class=" sidenavClass " class="bg-secondary scrollyboi">
 
       testing this
     </aside>
@@ -31,9 +31,9 @@
 
       ...mapGetters({
 
-        isAuth       : "auth/isAuth",
-        topNavRoutes : "topNavRoutes",
-        sidenavStyles : 'nav/sidenavStyles',
+        isAuth        : "auth/isAuth",
+        topNavRoutes  : "topNavRoutes",
+        sidenavClass  : 'nav/sidenavClass',
       })
     }
   }
@@ -41,19 +41,33 @@
 
 <style lang="scss" scoped>
 
-  .sidenav {
+  #sidenav-container {
 
     height: 100%;
     position: fixed;
     background-color: white;
-    box-shadow: 0px 2px 5px #ccc;
+    box-shadow: 0px 0px 10px 0px rgba( 0, 0, 0, 0.3 );
     z-index: 999;
     overflow-y: scroll;
+
+    padding-left: 0px !important;
   }
 
   .sidenav-open {
 
     width: 275px;
-    padding-left: 0px !important;
+  }
+
+  .sidenav-closed {
+
+    width: 75px;
+  }
+
+  @media only screen and ( max-width: 768px ){
+
+    .sidenav-closed {
+
+      width: 0px;
+    }
   }
 </style>

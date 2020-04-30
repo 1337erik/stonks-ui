@@ -65,6 +65,7 @@ axios.get( "/sanctum/csrf-cookie" )
       .catch( () => {
 
         store.dispatch( 'auth/setUser' );
+        // store.dispatch( 'alerts/addMessage', { type: 'danger', msg: 'Please log in again to continue' });
         store.dispatch( 'auth/setAuth', 0 );
       });
   })

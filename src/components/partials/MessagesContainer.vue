@@ -2,50 +2,53 @@
 
     <div id="messages-outer-container" class="scrollyboi">
 
-        <transition-group name="message-animation" tag="div" @before-leave=" beforeLeave " class="d-flex flex-column align-items-end" id="messages-inner-container">
+      <transition-group name="message-animation" tag="div" @before-leave=" beforeLeave " class="d-flex flex-column align-items-end" id="messages-inner-container">
 
-            <message v-for=" message in messages " :msg=" message " :key=" message.id "></message>
-        </transition-group>
+        <message v-for=" message in messages " :msg=" message " :key=" message.id "></message>
+      </transition-group>
     </div>
 </template>
 
 <script>
 
-    import Message from './Message';
-    import { mapActions, mapGetters } from 'vuex';
+  import Message from './Message';
+  import { mapActions, mapGetters } from 'vuex';
 
-    export default {
+  export default {
 
-        computed : {
+    computed : {
 
-            ...mapGetters({
+      ...mapGetters({
 
-                messages : 'alerts/messages',
-                messagesContainerStyles : 'nav/messagesContainerStyles',
-            })
-        },
-        methods : {
+        messages : 'alerts/messages',
+      })
+    },
+    methods : {
 
+      ...mapActions({
 
-            ...mapActions({
+        initMessagesFromStorage : 'alerts/initMessagesFromStorage',
+        flashMessage : 'alerts/flashMessage'
+      }),
+      beforeLeave( el ){
 
-                initMessagesFromStorage : 'alerts/initMessagesFromStorage',
-                flashMessage : 'alerts/flashMessage'
-            }),
-            beforeLeave( el ){
+        const { marginLeft, marginTop, width, height } = window.getComputedStyle( el );
+        el.style.left = `${el.offsetLeft - parseFloat( marginLeft, 10 )}px`;
+        el.style.top = `${el.offsetTop - parseFloat( marginTop, 10 )}px`;
+        el.style.width = width;
+        el.style.height = height;
+      },
+    },
+    mounted(){
 
-                const { marginLeft, marginTop, width, height } = window.getComputedStyle( el );
-                el.style.left = `${el.offsetLeft - parseFloat( marginLeft, 10 )}px`;
-                el.style.top = `${el.offsetTop - parseFloat( marginTop, 10 )}px`;
-                el.style.width = width;
-                el.style.height = height;
-            },
-        },
-        components : {
+      // load local storage messages
+      this.initMessagesFromStorage();
+    },
+    components : {
 
-            Message
-        }
+      Message
     }
+  }
 </script>
 
 <style>
@@ -56,21 +59,28 @@
     top: 0px;
     bottom: 0px;
     right: 75px;
+    height: 100%;
+    min-width: 350px;
     overflow-y: scroll;
     z-index: 777;
   }
 
   #messages-inner-container {
 
-    position: relative;
+    height: 100%;
+    padding-top: 75px;
   }
 
+  .message-animation-enter-active {
+
+    transition: all 0.8s ease;
+  }
   .message-animation-enter {
 
+    position: relative;
     opacity: 0;
     transform: translateY( -25px );
   }
-
   .message-animation-leave-to {
 
     transform: translateX( 25px );
@@ -83,6 +93,5 @@
   .message-animation-move {
 
     transition: all 0.8s ease;
-    opacity: 0.85;
   }
 </style>
