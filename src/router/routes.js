@@ -9,7 +9,8 @@ export default authentication.concat([
     meta: {
 
       authGuard : false,
-      onTopNav  : true
+      onTopnav  : true,
+      onSidenav : true
     }
   },
   {
@@ -19,7 +20,8 @@ export default authentication.concat([
     meta: {
 
       authGuard : true,
-      onTopNav  : true
+      onTopnav  : true,
+      onSidenav : true
     }
   },
   {
@@ -29,7 +31,19 @@ export default authentication.concat([
     meta: {
 
       authGuard : true,
-      onTopNav  : false
+      onTopnav  : true,
+      onSidenav : true
+    }
+  },
+  {
+    path: "/thrivemind",
+    name: "thrivemind",
+    component: () => import( /* webpackChunkName: "thrivemind" */ '../views/thrivemind/Thrivemind.vue' ),
+    meta: {
+
+      authGuard : true,
+      onTopnav  : true,
+      onSidenav : true
     }
   },
   {

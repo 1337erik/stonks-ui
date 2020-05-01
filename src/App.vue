@@ -76,6 +76,22 @@
   /* Enter and leave animations can use different */
   /* durations and timing functions. */
 
+  // active class for router links
+  #sidenav-container,
+  #topnav-container {
+
+    a {
+
+      font-weight: bold;
+      color: #2c3e50;
+
+      &.router-link-exact-active {
+
+        color: #007bff;
+      }
+    }
+  }
+
   .slide-fade-enter-active {
 
     transition: all .2s ease;

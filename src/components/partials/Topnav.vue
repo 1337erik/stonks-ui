@@ -1,6 +1,6 @@
 <template>
 
-  <b-navbar toggleable="md" type="light" variant="faded" fixed="top" id="nav" :class=" sidenavClass ">
+  <b-navbar toggleable="md" type="light" variant="faded" fixed="top" id="topnav-container" :class=" sidenavClass ">
 
     <b-icon :icon=" sidenavToggleIcon " @click=" toggleSidenav " class="mr-2" font-scale="1.5" id="sidenav-toggle" animation="cylon"></b-icon>
     <b-navbar-brand to="/" exact-active-class="" class="noselect">{{ $t( "appName" ) | capitalize }}</b-navbar-brand>
@@ -11,7 +11,7 @@
 
       <b-navbar-nav>
 
-        <b-nav-item v-for=" route in topNavRoutes" :key=" route.name " :to=" route.path " exact :exact-active-class=" activeClass " class="noselect">{{ $t( `routes.${route.name}` ) | capitalize }}</b-nav-item>
+        <b-nav-item v-for=" route in topnavRoutes" :key=" route.name " :to=" route.path " exact :exact-active-class=" activeClass " class="noselect">{{ $t( `routes.${route.name}` ) | capitalize }}</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -65,7 +65,7 @@
       ...mapGetters({
 
         isAuth            : "auth/isAuth",
-        topNavRoutes      : "nav/topNavRoutes",
+        topnavRoutes      : "nav/topnavRoutes",
         sidenavClass      : 'nav/sidenavClass',
         sidenavToggleIcon : 'nav/sidenavToggleIcon',
       })
@@ -75,30 +75,18 @@
 
 <style lang="scss" scoped>
 
-  #nav {
-
-    padding: 5px 15px;
-    box-shadow: 0px 0px 5px 5px rgba( 0, 0, 0, 0.2 );
-    width: 100%;
-    position: fixed;
-    z-index: 888;
-    background-color: #fff;
-
-    a {
-
-      font-weight: bold;
-      color: #2c3e50;
-
-      &.router-link-exact-active {
-
-        color: #007bff;
-      }
-    }
-  }
-
   #sidenav-toggle {
 
     cursor: pointer;
   }
 
+    #topnav-container {
+
+      padding: 5px 15px;
+      box-shadow: 0px 0px 5px 5px rgba( 0, 0, 0, 0.2 );
+      width: 100%;
+      position: fixed;
+      z-index: 888;
+      background-color: #fff;
+    }
 </style>

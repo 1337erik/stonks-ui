@@ -1,8 +1,31 @@
 <template>
 
-    <aside id="sidenav-container" :class=" sidenavClass " class="bg-secondary scrollyboi">
+    <aside id="sidenav-container" :class=" sidenavClass " class="bg-default scrollyboi">
 
-      testing this
+      <b-container fluid class="d-flex flex-column">
+
+        <b-row class="sidenav-header-section d-flex align-items-center">
+
+          <b-col v-if=" sidenavClass.includes( 'sidenav-open' ) ">
+
+            MetaLevel
+          </b-col>
+          <b-col v-else class="text-center">
+
+            M
+          </b-col>
+        </b-row>
+        <b-row style="flex: 11">
+
+          <b-col>
+
+            <div v-for=" route in sidenavRoutes " :key=" route.name " class="sidenav-route d-flex align-items-center">
+
+              <b-link :to=" route.path " exact :exact-active-class=" activeClass " class="noselect">{{ route.name | capitalize }}</b-link>
+            </div>
+          </b-col>
+        </b-row>
+      </b-container>
     </aside>
 </template>
 
@@ -16,6 +39,7 @@
 
       return {
 
+        activeClass : "router-link-exact-active"
       }
     },
     methods: {
@@ -32,8 +56,8 @@
       ...mapGetters({
 
         isAuth        : "auth/isAuth",
-        topNavRoutes  : "topNavRoutes",
         sidenavClass  : 'nav/sidenavClass',
+        sidenavRoutes : 'nav/sidenavRoutes',
       })
     }
   }
@@ -51,6 +75,16 @@
     overflow-y: scroll;
 
     padding-left: 0px !important;
+  }
+
+  .sidenav-header-section {
+
+    height: 50px;
+  }
+
+  .sidenav-route {
+
+    height: 75px;
   }
 
   .sidenav-open {
