@@ -3,9 +3,11 @@
   <b-navbar toggleable="md" type="light" variant="faded" fixed="top" id="topnav-container" :class=" sidenavClass ">
 
     <b-icon :icon=" sidenavToggleIcon " @click=" toggleSidenav " class="mr-2 unified-transition-class" font-scale="2" id="sidenav-toggle" :class=" `${sidenavClass}-absolute` "></b-icon>
-    <b-navbar-brand to="/" exact-active-class="" class="noselect brand-left-padding">{{ $t( "appName" ) | capitalize }}</b-navbar-brand>
+
+    <b-navbar-brand to="/" exact-active-class="" class="noselect brand-left-padding" :class=" sidenavOpen ? 'd-none d-md-inline-block' : '' " key="app-header">{{ $t( "appName" ) | capitalize }}</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse" style="position: absolute; right: 10px" v-if=" !sidenavOpen "></b-navbar-toggle>
+
     <b-collapse id="nav-collapse" is-nav>
 
       <b-navbar-nav>
@@ -84,6 +86,7 @@
 
   #topnav-container {
 
+    height: 50px;
     padding: 5px 15px;
     box-shadow: 0px 0px 5px 5px rgba( 0, 0, 0, 0.2 );
     width: 100%;
