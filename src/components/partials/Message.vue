@@ -77,4 +77,13 @@
     display: inline-block;
     margin: 0px 10px 0px auto;
   }
+
+  @media only screen and ( max-width: 768px ){
+
+    .message-container {
+
+      font-size: 14px;
+      max-width: 185px;
+    }
+  }
 </style>

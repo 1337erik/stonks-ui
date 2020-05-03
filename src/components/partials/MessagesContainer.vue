@@ -51,7 +51,7 @@
   }
 </script>
 
-<style>
+<style lang="scss">
 
   #messages-outer-container {
 
@@ -93,5 +93,14 @@
   .message-animation-move {
 
     transition: all 0.8s ease;
+  }
+
+  @media only screen and ( max-width: 768px ){
+
+    #messages-outer-container {
+
+      min-width: 185px;
+      right: 15px;
+    }
   }
 </style>
