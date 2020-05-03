@@ -74,6 +74,11 @@
     position: relative;
   }
 
+  * {
+
+    touch-action: manipulation;
+  }
+
   /** ******************************************* **/
   /*            GLOBAL                            */
   /* Enter and leave animations can use different */
