@@ -1,67 +1,27 @@
+import routes from '@/router/routes';
+
 export default {
 
     namespaced : true,
     state : {
 
-        topnavHeight : 85,
-        sidenavWidth : 295,
+        sidenavOpen  : false
     },
     mutations : {
 
-        setTopnavHeight : ( state, val ) => state.topnavHeight = val,
-        setSidenavWidth : ( state, val ) => state.sidenavWidth = val,
+        toggleSidenav   : state => state.sidenavOpen = !state.sidenavOpen,
     },
     actions : {
 
-        setTopnavHeight( ctx, val ){
-
-            ctx.commit( 'setTopnavHeight', val );
-        },
-        setSidenavWidth( ctx, val ){
-
-            ctx.commit( 'setSidenavWidth', val );
-        },
+        toggleSidenav( ctx ){ ctx.commit( 'toggleSidenav' ); },
     },
     getters : {
 
-        sidenavStyles : state => {
-
-            return {
-
-                width : `${state.sidenavWidth}px`
-            }
-        },
-        topnavStyles : state => {
-
-            return {
-
-                height: `${state.topnavHeight}px`,
-                paddingLeft : `${state.sidenavWidth + 35}px`,
-            }
-        },
-        appContainerStyles : state => {
-
-            return {
-
-                paddingTop: `${state.topnavHeight + 45}px`,
-                paddingLeft: `${state.sidenavWidth + 45}px`,
-            }
-        },
-        messagesContainerStyles : state => {
-
-            return {
-
-                paddingTop: `${state.topnavHeight + 60}px`,
-                right: `${45}px`,
-            }
-        },
-        footerStyles : state => {
-
-            return {
-
-                height: `${state.topnavHeight - 15}px`,
-                paddingLeft: `${state.sidenavWidth + 35}px`,
-            }
-        },
+        sidenavRoutes     : () => routes.filter( r => r.meta && r.meta.onSidenav ).sort( ( a, b ) => a.meta.placement - b.meta.placement ),
+        topnavRoutes      : () => routes.filter( r => r.meta && r.meta.onTopnav ).sort( ( a, b ) => a.meta.placement - b.meta.placement ),
+        sidenavOpen       : state => state.sidenavOpen,
+        sidenavClass      : state => 'unified-transition-class ' + ( state.sidenavOpen ? 'sidenav-open' : 'sidenav-closed' ),
+        sidenavToggleIcon : state => state.sidenavOpen ? 'plus-square-fill' : 'layout-sidebar-inset',
+        // sidenavToggleIcon : state => state.sidenavOpen ? 'caret-left-fill' : 'caret-right',
     }
 }
