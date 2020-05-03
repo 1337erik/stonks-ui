@@ -6,14 +6,17 @@
 
         <b-row class="sidenav-header-section d-flex align-items-center">
 
-          <b-col v-if=" sidenavClass.includes( 'sidenav-open' ) ">
+          <transition mode="out-in" name="slide-fade">
 
-            MetaLevel
-          </b-col>
-          <b-col v-else class="text-center">
+            <b-col v-if=" sidenavClass.includes( 'sidenav-open' ) " key="first-element">
 
-            M
-          </b-col>
+              MetaLevel
+            </b-col>
+            <b-col v-else class="text-center" key="second-element">
+
+              M
+            </b-col>
+          </transition>
         </b-row>
         <b-row style="flex: 11">
 
@@ -21,7 +24,11 @@
 
             <div v-for=" route in sidenavRoutes " :key=" route.name " class="sidenav-route d-flex align-items-center">
 
-              <b-link :to=" route.path " exact :exact-active-class=" activeClass " class="noselect">{{ route.name | capitalize }}</b-link>
+              <i :class=" route.meta.icon + ' ' + iconClass " class="sidenav-icon noselect" :id=" `sidenav-icon-${route.name}` " style="font-size: 24px"></i>
+              <transition mode="out-in" name="slide-fade">
+
+                <b-link :to=" route.path " exact :exact-active-class=" activeClass " class="noselect sidenav-text" v-if=" sidenavOpen " :key=" route.name ">{{ route.name | capitalize }}</b-link>
+              </transition>
             </div>
           </b-col>
         </b-row>
@@ -58,7 +65,10 @@
         isAuth        : "auth/isAuth",
         sidenavClass  : 'nav/sidenavClass',
         sidenavRoutes : 'nav/sidenavRoutes',
-      })
+        sidenavOpen   : 'nav/sidenavOpen',
+      }),
+      iconAnimated(){return this.sidenavOpen ? 'cylon' : null},
+      iconClass(){return this.sidenavOpen ? 'mr-3' : null},
     }
   }
 </script>
@@ -80,6 +90,19 @@
   .sidenav-header-section {
 
     height: 50px;
+  }
+
+  .sidenav-icon {
+
+    cursor: pointer;
+    width: 40px;
+    text-align: center;
+    position: absolute;
+  }
+
+  .sidenav-text {
+
+    padding-left: 60px;
   }
 
   .sidenav-route {

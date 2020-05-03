@@ -2,7 +2,7 @@
 
   <b-navbar toggleable="md" type="light" variant="faded" fixed="top" id="topnav-container" :class=" sidenavClass ">
 
-    <b-icon :icon=" sidenavToggleIcon " @click=" toggleSidenav " class="mr-2" font-scale="1.5" id="sidenav-toggle" animation="cylon"></b-icon>
+    <b-icon :icon=" sidenavToggleIcon " @click=" toggleSidenav " class="mr-2" font-scale="1.5" id="sidenav-toggle"></b-icon>
     <b-navbar-brand to="/" exact-active-class="" class="noselect">{{ $t( "appName" ) | capitalize }}</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -80,13 +80,13 @@
     cursor: pointer;
   }
 
-    #topnav-container {
+  #topnav-container {
 
-      padding: 5px 15px;
-      box-shadow: 0px 0px 5px 5px rgba( 0, 0, 0, 0.2 );
-      width: 100%;
-      position: fixed;
-      z-index: 888;
-      background-color: #fff;
-    }
+    padding: 5px 15px;
+    box-shadow: 0px 0px 5px 5px rgba( 0, 0, 0, 0.2 );
+    width: 100%;
+    position: fixed;
+    z-index: 888;
+    background-color: #fff;
+  }
 </style>
