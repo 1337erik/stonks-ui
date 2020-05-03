@@ -8,7 +8,7 @@
 
     <b-navbar-toggle target="nav-collapse" style="position: absolute; right: 10px" v-if=" !sidenavOpen "></b-navbar-toggle>
 
-    <b-collapse id="nav-collapse" is-nav>
+    <b-collapse id="nav-collapse" is-nav v-if=" !sidenavOpen ">
 
       <b-navbar-nav>
 

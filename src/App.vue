@@ -4,6 +4,7 @@
 
     <topnav />
 
+    <backdrop />
     <sidenav />
 
     <!-- Alert Messages - see alerts.js and Message.vue -->
@@ -20,6 +21,7 @@
 
   import Topnav from './components/partials/Topnav';
   import Sidenav from './components/partials/Sidenav';
+  import Backdrop from './components/partials/Backdrop';
   import MessagesContainer from './components/partials/MessagesContainer';
   import MainAppContainer from './components/partials/MainAppContainer';
   import LoginModal from "@/components/authentication/LoginModal";
@@ -47,6 +49,7 @@
       MessagesContainer,
       MainAppContainer,
       LoginModal,
+      Backdrop,
       RegisterModal
     }
   }
