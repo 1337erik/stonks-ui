@@ -2,11 +2,10 @@
 
   <b-navbar toggleable="md" type="light" variant="faded" fixed="top" id="topnav-container" :class=" sidenavClass ">
 
-    <b-icon :icon=" sidenavToggleIcon " @click=" toggleSidenav " class="mr-2" font-scale="1.5" id="sidenav-toggle"></b-icon>
-    <b-navbar-brand to="/" exact-active-class="" class="noselect">{{ $t( "appName" ) | capitalize }}</b-navbar-brand>
+    <b-icon :icon=" sidenavToggleIcon " @click=" toggleSidenav " class="mr-2 unified-transition-class" font-scale="2" id="sidenav-toggle" :class=" `${sidenavClass}-absolute` "></b-icon>
+    <b-navbar-brand to="/" exact-active-class="" class="noselect brand-left-padding">{{ $t( "appName" ) | capitalize }}</b-navbar-brand>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
+    <b-navbar-toggle target="nav-collapse" style="position: absolute; right: 10px" v-if=" !sidenavOpen "></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
 
       <b-navbar-nav>
@@ -68,6 +67,7 @@
         topnavRoutes      : "nav/topnavRoutes",
         sidenavClass      : 'nav/sidenavClass',
         sidenavToggleIcon : 'nav/sidenavToggleIcon',
+        sidenavOpen       : 'nav/sidenavOpen',
       })
     }
   }
@@ -78,6 +78,8 @@
   #sidenav-toggle {
 
     cursor: pointer;
+    position: absolute;
+    left: 15px;
   }
 
   #topnav-container {
@@ -88,5 +90,19 @@
     position: fixed;
     z-index: 888;
     background-color: #fff;
+    justify-content: center !important;
+  }
+
+  .brand-left-padding {
+
+    padding-left: 50px !important;
+  }
+
+  @media only screen and ( max-width: 768px ){
+
+    .brand-left-padding {
+
+      padding-left: 0px !important;
+    }
   }
 </style>

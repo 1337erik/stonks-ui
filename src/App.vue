@@ -142,9 +142,19 @@
     padding-left: 285px !important;
   }
 
+  .sidenav-open-absolute {
+
+    left: 285px !important;
+  }
+
   .sidenav-closed {
 
     padding-left: 95px !important;
+  }
+
+  .sidenav-closed-absolute {
+
+    left: 95px !important;
   }
 
   @media only screen and ( max-width: 768px ){
@@ -152,6 +162,11 @@
     .sidenav-closed {
 
       padding-left: 15px !important;
+    }
+
+    .sidenav-closed-absolute {
+
+      left: 15px !important;
     }
   }
   /** ******************************************* **/

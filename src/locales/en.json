@@ -3,18 +3,21 @@
   "language" : "english",
   "routes"   : {
 
-    "home"        : "home",
-    "coaching"    : "coach connect",
-    "thrivemind"  : "thrivemind",
-    "forums"      : "forums",
-    "billing"     : "billing",
-    "mindcraft"   : "mindcraft",
-    "backlog"     : "backlog",
-
-    "register"    : "register",
-    "profile"     : "profile",
-    "logout"      : "logout",
-    "login"       : "login"
+    "home"         : "home",
+    "coachConnect" : "coach connect",
+    "thrivemind"   : "thrivemind",
+    "forums"       : "forums",
+    "billing"      : "billing",
+    "mindcraft"    : "mindcraft",
+    "backlog"      : "backlog",
+    "settings"     : "settings",
+    "authorship"   : "authorship",
+    "colosseum"    : "colosseum",
+    "events"       : "events",
+    "anchor"       : "anchor",
+    "shop"         : "shop",
+    "charities"    : "charities",
+    "profile"      : "profile"
   },
   "not_in_use" : "not in use",
   "user"       : "user",
