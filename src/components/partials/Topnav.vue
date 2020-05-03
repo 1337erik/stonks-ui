@@ -2,7 +2,7 @@
 
   <b-navbar toggleable="md" type="light" variant="faded" fixed="top" id="topnav-container" :class=" sidenavClass ">
 
-    <b-icon :icon=" sidenavToggleIcon " @click=" toggleSidenav " class="mr-2 unified-transition-class" font-scale="2" id="sidenav-toggle" :class=" `${sidenavClass}-absolute` "></b-icon>
+    <b-icon :icon=" sidenavToggleIcon " @click=" toggleSidenav " class="mr-2 unified-transition-class" font-scale="1.5" id="sidenav-toggle" :class=" `${sidenavClass}-absolute` "></b-icon>
 
     <b-navbar-brand to="/" exact-active-class="" class="noselect brand-left-padding" :class=" sidenavOpen ? 'd-none d-md-inline-block' : '' " key="app-header">{{ $t( "appName" ) | capitalize }}</b-navbar-brand>
 
@@ -98,7 +98,19 @@
 
   .brand-left-padding {
 
+    width: 160px;
     padding-left: 50px !important;
+  }
+
+  .navbar-collapse {
+
+    flex-basis: 100%;
+    flex-grow: 1;
+    align-items: center;
+    background-color: white;
+    margin: 5px -20px 0px;
+    padding: 0 25px;
+    text-align: right;
   }
 
   @media only screen and ( max-width: 768px ){
@@ -106,6 +118,11 @@
     .brand-left-padding {
 
       padding-left: 0px !important;
+    }
+
+    .navbar-collapse {
+
+
     }
   }
 </style>

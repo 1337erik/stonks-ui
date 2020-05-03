@@ -17,7 +17,10 @@
     "anchor"       : "anchor",
     "shop"         : "shop",
     "charities"    : "charities",
-    "profile"      : "profile"
+    "profile"      : "profile",
+    "register"     : "register",
+    "login"        : "login",
+    "logout"       : "logout"
   },
   "not_in_use" : "not in use",
   "user"       : "user",

@@ -21,7 +21,7 @@ export default {
         topnavRoutes      : () => routes.filter( r => r.meta && r.meta.onTopnav ).sort( ( a, b ) => a.meta.placement - b.meta.placement ),
         sidenavOpen       : state => state.sidenavOpen,
         sidenavClass      : state => 'unified-transition-class ' + ( state.sidenavOpen ? 'sidenav-open' : 'sidenav-closed' ),
-        sidenavToggleIcon : state => state.sidenavOpen ? 'plus-square-fill' : 'layout-sidebar-inset',
+        sidenavToggleIcon : state => state.sidenavOpen ? 'x' : 'layout-sidebar-inset',
         // sidenavToggleIcon : state => state.sidenavOpen ? 'caret-left-fill' : 'caret-right',
     }
 }

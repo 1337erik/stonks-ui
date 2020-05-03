@@ -159,6 +159,19 @@
 
   @media only screen and ( max-width: 768px ){
 
+    .dropdown-item {
+      // bootstrap override
+
+      text-align: right !important;
+    }
+
+    .navbar-nav{
+      // bootstrap override
+
+      width: 35%;
+      margin-left: auto;
+    }
+
     .sidenav-closed {
 
       padding-left: 15px !important;
