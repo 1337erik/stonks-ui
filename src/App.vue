@@ -129,6 +129,7 @@
     -ms-overflow-style: none;
   }
 
+
   .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */
@@ -143,6 +144,16 @@
   .unified-transition-class {
 
     transition: all 0.3s ease;
+  }
+
+  .opacityzero {
+
+    opacity: 0;
+  }
+
+  .opacityfull {
+
+    opacity: 1;
   }
 
   .sidenav-open {
@@ -166,6 +177,16 @@
   }
 
   @media only screen and ( max-width: 768px ){
+
+    .sm-opacityzero {
+
+      opacity: 0;
+    }
+
+    .sm-opacityfull {
+
+      opacity: 1;
+    }
 
     .dropdown-item {
       // bootstrap override

@@ -4,11 +4,11 @@
 
     <b-icon :icon=" sidenavToggleIcon " @click=" toggleSidenav " class="mr-2 unified-transition-class" font-scale="1.5" id="sidenav-toggle" :class=" `${sidenavClass}-absolute` "></b-icon>
 
-    <b-navbar-brand to="/" exact-active-class="" class="noselect brand-left-padding" :class=" sidenavOpen ? 'd-none d-md-inline-block' : '' " key="app-header">{{ $t( "appName" ) | capitalize }}</b-navbar-brand>
+    <b-navbar-brand to="/" exact-active-class="" class="unified-transition-class noselect brand-left-padding" key="app-header">{{ $t( "appName" ) | capitalize }}</b-navbar-brand>
 
-    <b-navbar-toggle target="nav-collapse" style="position: absolute; right: 10px" v-if=" !sidenavOpen "></b-navbar-toggle>
+    <b-navbar-toggle target="nav-collapse" style="position: absolute; right: 10px;" class="unified-transition-class" :class=" sidenavOpen ? 'opacityzero' : 'opacityfull' " ></b-navbar-toggle>
 
-    <b-collapse id="nav-collapse" is-nav v-if=" !sidenavOpen ">
+    <b-collapse id="nav-collapse" is-nav class="unified-transition-class" :class=" sidenavOpen ? 'sm-opacityzero' : 'sm-opacityfull' " >
 
       <b-navbar-nav>
 
