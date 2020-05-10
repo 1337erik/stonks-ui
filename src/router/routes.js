@@ -37,8 +37,8 @@ export default [
 
       authGuard : true,
       onTopnav  : false,
-      onSidenav : false,
-      placement : 0,
+      onSidenav : true,
+      placement : 100,
       icon      : 'icon-universal-access',
     }
   },

@@ -44,7 +44,7 @@ axios.interceptors.response.use(
 
       store.dispatch( 'alerts/addMessage', { type: 'error', msg: 'Authentication expired! Please login again.' });
       store.dispatch( 'auth/logout' );
-      store.dispatch( 'auth/toggleLoginModal' );
+      store.dispatch( 'auth/setLoginModal', true );
     }
 
     return Promise.reject(error);
@@ -65,7 +65,6 @@ axios.get( "/sanctum/csrf-cookie" )
       .catch( () => {
 
         store.dispatch( 'auth/setUser' );
-        // store.dispatch( 'alerts/addMessage', { type: 'danger', msg: 'Please log in again to continue' });
         store.dispatch( 'auth/setAuth', 0 );
       });
   })

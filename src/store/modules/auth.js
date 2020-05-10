@@ -30,6 +30,7 @@ export default {
     },
     mutations : {
 
+        setLoginModal       : ( state, bool ) => state.loginModalActive = bool,
         toggleLoginModal    : state => state.loginModalActive = !state.loginModalActive,
         toggleRegisterModal : state => state.registerModalActive = !state.registerModalActive,
         setErrors           : ( state, errors ) => state.errors = errors,
@@ -46,6 +47,11 @@ export default {
 
             ctx.commit( 'setErrors', null );
             ctx.commit( 'toggleLoginModal' );
+        },
+        setLoginModal( ctx, bool ){
+
+            ctx.commit( 'setErrors', null );
+            ctx.commit( 'setLoginModal', bool );
         },
         toggleRegisterModal( ctx ){
 

@@ -2,7 +2,10 @@
 
   <div>
 
-      profile lmfao
+    <p>Get basic data</p>
+    <ul>
+      <li>CRUD basic data</li>
+    </ul>
   </div>
 </template>
 
