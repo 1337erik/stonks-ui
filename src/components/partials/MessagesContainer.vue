@@ -57,10 +57,9 @@
 
     position: fixed;
     top: 0px;
-    bottom: 0px;
+    min-height: 145px;
     right: 75px;
-    height: 100%;
-    min-width: 350px;
+    min-width: 50%;
     overflow-y: scroll;
     z-index: 777;
   }
@@ -68,6 +67,7 @@
   #messages-inner-container {
 
     height: 100%;
+    min-height: 145px;
     padding-top: 75px;
   }
 
@@ -83,7 +83,6 @@
   }
   .message-animation-leave-to {
 
-    transform: translateX( 25px );
     opacity: 0;
   }
   .message-animation-leave-active {
