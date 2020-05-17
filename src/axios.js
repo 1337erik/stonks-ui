@@ -39,11 +39,12 @@ axios.interceptors.response.use(
 
     console.log( 'response!', error.response );
 
-    if( error.response.status == 401 ){
-      // auth is invalid, also session expired sends this
+    if( [ 401, 419 ].includes( error.response.status ) ){
+      // auth is invalid, also session expired sends this & csrf mismatch
 
       store.dispatch( 'alerts/addMessage', { type: 'error', msg: 'Authentication expired! Please login again.' });
-      store.dispatch( 'auth/logout' );
+      store.dispatch( 'auth/setAuth', 0 );
+      store.dispatch( 'auth/setUser' );
       store.dispatch( 'auth/setLoginModal', true );
     }
 

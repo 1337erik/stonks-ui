@@ -32,7 +32,7 @@
 
           <div class="d-flex flex-column">
 
-            <p class="mb-0">{{ int.title }}</p>
+            <p class="mb-0">{{ int.title | capitalize }}</p>
             <p class="text-muted">{{ formatDateTime( int.fulfill_by ) }}</p>
           </div>
           <div class="d-flex flex-column">
