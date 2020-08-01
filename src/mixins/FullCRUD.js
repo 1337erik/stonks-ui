@@ -38,7 +38,8 @@ export default {
         paginationText(){
 
             return `Showing ${this.firstItem} - ${this.lastItem} of ${this.totalRows} records`;
-        }
+        },
+        appliedFilters(){ return `?override=incomponent`; }
     },
     methods: {
 
@@ -60,6 +61,38 @@ export default {
                     this.totalRows = 0;
                     this.items     = [];
                 }).finally( () => this.loading = false );
+        },
+
+        deleteOne( id ){
+
+            if( !id ) return;
+
+            this.form.delete( `/api/${this.baseUrl}/${id}` )
+                .then( ({ data }) => {
+
+                    console.log( 'hey penis lol', data );
+                    const index = this.items.findIndex( i => i.id == id );
+                    if( index != '-1' ) this.loadItems();
+                })
+                .catch( () => {
+
+
+                }).finally( () => this.loading = false );
+        },
+
+        updateOne( data ){
+
+            console.log( data );
+        },
+
+        createOne( data ){
+
+            console.log( data );
+        },
+
+        showOne( id ){
+
+            console.log( id );
         },
 
         exportXls() {

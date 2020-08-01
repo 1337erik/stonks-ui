@@ -22,12 +22,12 @@
 
           <b-col>
 
-            <div v-for=" route in sidenavRoutes " :key=" `route${route.id}` " class="sidenav-route d-flex align-items-center">
+            <div v-for=" route in sidenavRoutes " :key=" `route${route.name}` " class="sidenav-route d-flex align-items-center">
 
               <b-link :to=" route.path " exact :exact-active-class=" activeClass " class="noselect" style="height: 25px"><i :class=" route.meta.icon + ' ' + iconClass " class="sidenav-icon noselect" :id=" `sidenav-icon-${route.name}` " :to=" route.path " style="font-size: 24px"></i></b-link>
               <transition mode="out-in" name="slide-fade">
 
-                <b-link :to=" route.path " exact :exact-active-class=" activeClass " class="noselect sidenav-text" v-if=" sidenavOpen " :key=" `link${route.id}` ">{{ route.name | capitalize }}</b-link>
+                <b-link :to=" route.path " exact :exact-active-class=" activeClass " class="noselect sidenav-text" v-if=" sidenavOpen " :key=" `link${route.name}` ">{{ route.name | capitalize }}</b-link>
               </transition>
             </div>
           </b-col>

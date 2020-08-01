@@ -44,7 +44,7 @@
         position: relative;
         width: 100%;
         min-height: 100%;
-        padding-top: 75px;
+        padding-top: 95px;
         padding-bottom: 100px;
         z-index: 555;
     }
