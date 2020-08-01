@@ -25,7 +25,9 @@ export default {
             stripe_id         : null,
             timezone          : null,
             trial_ends_at     : null,
-            updated_at        : null
+            updated_at        : null,
+            roles             : [],
+            permissions       : []
         }
     },
     mutations : {
