@@ -10,11 +10,11 @@
 
             <b-col v-if=" sidenavClass.includes( 'sidenav-open' ) " key="first-element">
 
-              MetaLevel
+              Stonks
             </b-col>
             <b-col v-else class="text-center" key="second-element">
 
-              M
+              S
             </b-col>
           </transition>
         </b-row>
@@ -24,7 +24,7 @@
 
             <div v-for=" route in sidenavRoutes " :key=" `route${route.name}` " class="sidenav-route d-flex align-items-center">
 
-              <b-link :to=" route.path " exact :exact-active-class=" activeClass " class="noselect" style="height: 25px"><i :class=" route.meta.icon + ' ' + iconClass " class="sidenav-icon noselect" :id=" `sidenav-icon-${route.name}` " :to=" route.path " style="font-size: 24px"></i></b-link>
+              <b-link exact :exact-active-class=" activeClass " class="noselect" style="height: 25px" :to=" route.path "><b-icon font-scale="2" :icon=" route.meta.icon " :class=" iconClass " class="sidenav-icon noselect" :id=" `sidenav-icon-${route.name}` " :to=" route.path "></b-icon></b-link>
               <transition mode="out-in" name="slide-fade">
 
                 <b-link :to=" route.path " exact :exact-active-class=" activeClass " class="noselect sidenav-text" v-if=" sidenavOpen " :key=" `link${route.name}` ">{{ route.name | capitalize }}</b-link>
@@ -66,6 +66,7 @@
         sidenavClass  : 'nav/sidenavClass',
         sidenavRoutes : 'nav/sidenavRoutes',
         sidenavOpen   : 'nav/sidenavOpen',
+        isGod         : 'auth/isGod'
       }),
       iconAnimated(){return this.sidenavOpen ? 'cylon' : null},
       iconClass(){return this.sidenavOpen ? 'mr-3' : null},
@@ -95,7 +96,7 @@
   .sidenav-icon {
 
     cursor: pointer;
-    width: 40px;
+    width: 50px;
     text-align: center;
     position: absolute;
   }

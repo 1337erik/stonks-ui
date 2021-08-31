@@ -1,4 +1,4 @@
-# metalevel-ui
+# stonks-ui
 
 ## Project setup
 ```

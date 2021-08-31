@@ -4,7 +4,11 @@ import Vuex from "vuex";
 import auth from './modules/auth';
 import alerts from './modules/alerts';
 import nav from './modules/nav';
-import intentions from './modules/intentions';
+import transactions from './modules/transactions';
+import coins from './modules/coins';
+import farms from './modules/farms';
+
+window.numeral = require( 'numeral' );
 
 Vue.use(Vuex);
 
@@ -21,6 +25,8 @@ export default new Vuex.Store({
     auth,
     alerts,
     nav,
-    intentions,
+    transactions,
+    coins,
+    farms,
   }
 });

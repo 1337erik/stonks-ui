@@ -1,5 +1,6 @@
 import Form from '../classes/Form';
 import { mapGetters } from 'vuex';
+import _ from 'lodash';
 
 export default {
 
@@ -7,14 +8,30 @@ export default {
 
         return {
 
+            baseUrl     : '/', // override with slash first like '/business/example/route'
             loading     : false,
             items       : [],
 
-            totalRows   : 0,
-            perPage     : 25,
-            currentPage : 1,
+            fields     : [
+
+                // {
+                //     key      : 'sample',
+                //     label    : 'OverrideMe',
+                //     sortable : true
+                // },
+            ],
+
             sortBy      : 'lastname',
             sortDesc    : false,
+
+            pagination  : {
+
+                page       : 1,
+                per_page   : 25,
+                total_rows : 0
+            },
+
+            aggregates  : [],
 
             form        : new Form()
         }
@@ -25,36 +42,54 @@ export default {
 
             'isAuth' : 'auth/isAuth'
         }),
+
         sortableFields(){ return this.fields ? this.fields.filter( x => x.sortable ).map( x => x.key ) : []; },
+
         paginationControls(){
 
-            let sort = this.sortableFields.includes( this.sortBy ) ? this.sortBy : '';
-
-            return `&page=${this.currentPage}&perPage=${this.perPage}&sort=${sort}&desc=${this.sortDesc}`;
+            return `&page=${this.pagination.page}&perPage=${this.pagination.per_page}`;
         },
-        firstItem(){ return ( this.currentPage - 1 ) * this.perPage; },
-        lastItem(){ return ( this.firstItem + this.perPage <= this.totalRows ? this.firstItem + this.perPage : this.totalRows ); },
+        sortControls(){
+
+            let sort = this.sortableFields.includes( this.sortBy ) ? this.sortBy : '';
+            return `&sort=${sort}&desc=${this.sortDesc}`;
+        },
+
+        firstItem(){ return ( this.pagination.page - 1 ) * this.pagination.per_page; },
+        lastItem(){ return ( this.firstItem + this.pagination.per_page <= this.pagination.total_rows ? this.firstItem + this.pagination.per_page : this.pagination.total_rows ); },
         total(){ return this.lastItem - this.firstItem; },
+
         paginationText(){
 
-            return `Showing ${this.firstItem} - ${this.lastItem} of ${this.totalRows} records`;
+            return `Showing ${this.firstItem} - ${this.lastItem} of ${this.pagination.total_rows} records`;
         },
-        appliedFilters(){ return `?override=incomponent`; }
+
+        appliedFilters(){ /* define in component computed properties to override this for component-specific filters that will trigger the watch-reload */ return '?override=incomponent'; },
+        unwatchedFilters(){ /* define in component computed properties to override this for component-specific filters that you dont want to trigger the watch-reload, like free-text search */ return ''; },
+        combinedFilters(){ return this.appliedFilters + this.unwatchedFilters; }
     },
     methods: {
 
+        setPerPage( int ){
+
+            this.pagination.per_page = int;
+        },
+        mapAggregateTitle( title ){
+
+            return _.startCase( _.toLower( title ) ) + ':';
+        },
         loadItems() {
 
             if( !this.isAuth || this.loading ) return;
 
             this.loading = true;
-
-            this.form.get( `/api/${this.baseUrl}${this.appliedFilters}/${this.paginationControls}` )
+            this.form.alertOnResponse = false;
+            this.form.get( `/api/${this.baseUrl}${this.combinedFilters}${this.paginationControls}${this.sortControls}` )
                 .then( ({ data }) => {
 
-                    console.log( 'hey penis lol', data, data.data.total, data.data.results );
-                    this.totalRows = data.data.total;
-                    this.items     = data.data.results || [];
+                    console.log( 'hey penis lol', data.aggregates.total, data.results );
+                    this.pagination.total_rows = data.aggregates.total;
+                    this.items = data.results || [];
                 })
                 .catch( () => {
 

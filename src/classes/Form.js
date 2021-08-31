@@ -153,7 +153,7 @@ class Form {
     return new Promise((resolve, reject) => {
       axios[verb](url, this.data(multipart))
         .then(response => {
-          console.log("Axios success");
+          // console.log( "Axios success" );
           this.handler = new AxiosResponseHandler();
           this.handler.handleResponse(
             response,
@@ -163,7 +163,7 @@ class Form {
           resolve(response);
         })
         .catch(error => {
-          console.log("Axios error");
+          console.error( "Axios error" );
           this.handler = new AxiosResponseHandler();
           this.handler.handleError(
             error,

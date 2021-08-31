@@ -1,29 +1,30 @@
 <template>
 
-  <div>
+  <b-row>
 
+    <b-col>
 
-    <p>today at a glance</p>
-    <ul>
-      <li>What is today? is this from anchor? Statistics?</li>
-    </ul>
-    <p>news of the day</p>
-    <ul>
-      <li>From where.. youtube? Medium?</li>
-      <li>What about a slider displaying random thrivemind facts.. thats cool</li>
-    </ul>
-    <p>community rankings / shoutouts</p>
-    <ul>
-      <li>based on authorship</li>
-      <li>based on coaching feedback?</li>
-    </ul>
+      <accounts></accounts>
+    </b-col>
+    <!-- <line-chart :chartdata=" data " :options=" options " />
 
-  </div>
+    <b-row class="mt-4">
+
+      <b-col>
+
+        <b-btn variant="primary" class="mr-2" @click=" loadItems() ">Reload Transactions</b-btn>
+        <b-btn variant="danger" class="mr-2">Request Withdraw</b-btn>
+        <b-btn variant="info">Request Deposit</b-btn>
+      </b-col>
+    </b-row> -->
+  </b-row>
 </template>
 
 <script>
 
   import { mapGetters } from 'vuex';
+  // import LineChart from '../components/charts/Linechart.vue';
+  import Accounts from '../views/features/Accounts';
 
   export default {
 
@@ -33,7 +34,32 @@
       return {
 
         i : 0,
-        msgs : []
+        msgs : [],
+
+        data: {
+          // TODO move the charts to either some account summary component,
+          //    or a transactions component
+
+          labels: [ '7/9/21', '7/16/21', '7/23/21', '7/30/21', '8/6/21', '8/13/21' ],
+          datasets: [
+
+            {
+              label: 'Johns Record',
+              backgroundColor: '#f87979',
+              data: [ 18500, 19750, 20150, 21050, 21200, 21450 ]
+            },
+            {
+              label: 'Jimmys Record',
+              backgroundColor: '#79f8b0',
+              data: [ 1500, 1750, 2050, 2350, 2600, 3050 ]
+            }
+          ]
+        },
+        options: {
+
+          responsive: true,
+          maintainAspectRatio: false
+        }
       };
     },
     computed :{
@@ -41,12 +67,14 @@
       ...mapGetters({
 
         user : 'auth/user'
-      })
+      }),
     },
     mounted(){
 
       if( !this.user.id ) return;
-      // this.$echo.private( 'metalevel_database_penile-transplants.' + this.user.id )
+
+      // REFERENCE FOR INIT ECHO
+      // this.$echo.private( 'stonks_database_penile-transplants.' + this.user.id )
       //   .listen( '.UserEvent', ( data ) => {
 
       //     console.log( 'gottem!', data );
@@ -86,6 +114,8 @@
     },
     components: {
 
+      // LineChart,
+      Accounts
     }
   };
 </script>

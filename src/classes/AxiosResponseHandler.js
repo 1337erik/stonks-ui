@@ -10,7 +10,7 @@ class AxiosResponseHandler {
 
   handleResponse(response, alert = true) {
     this.response = response;
-    console.log( this.getMessage() );
+    // console.log( 'the message:', this.getMessage() );
     if (alert && this.getMessage())
       this.handleAlert("success", this.getMessage());
   }

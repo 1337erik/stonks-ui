@@ -34,6 +34,7 @@
 
       ...mapGetters({
 
+        isGod : 'auth/isGod'
       })
     },
     methods : {

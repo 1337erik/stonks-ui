@@ -76,7 +76,7 @@ export default {
 
                     ctx.dispatch( 'setUser', res.data );
                     ctx.commit( 'setAuth', 1 );
-                    ctx.dispatch( 'alerts/addMessage', { type: 'success', msg: 'Welcome to MetaLevel!'}, { root: true });
+                    ctx.dispatch( 'alerts/addMessage', { type: 'success', msg: 'Welcome to Stonks!'}, { root: true });
                     ctx.commit( 'toggleRegisterModal' );
                 })
                 .catch( err => {
@@ -132,6 +132,7 @@ export default {
         isAuth              : state => state.isAuth,
         loginModalActive    : state => state.loginModalActive,
         registerModalActive : state => state.registerModalActive,
-        errors              : state => state.errors
+        errors              : state => state.errors,
+        isGod               : state => ( state.user && state.user.roles && state.user.roles.some( e => e.type == 'god' ) )
     }
 }

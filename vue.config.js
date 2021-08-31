@@ -1,6 +1,6 @@
 module.exports = {
   devServer: {
-    host: "ui.metalevel.test"
+    host: "ui.stonks.test"
   },
 
   pluginOptions: {

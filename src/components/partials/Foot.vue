@@ -2,7 +2,6 @@
 
     <div id="footer" :class=" sidenavClass ">
 
-        fuck yeah
     </div>
 </template>
 

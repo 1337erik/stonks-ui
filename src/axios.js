@@ -10,14 +10,14 @@ axios.interceptors.request.use(
   function(config) {
     // Do something before request is sent
 
-    console.log( 'the config before!', config );
+    // console.log( 'the config before!', config );
 
     return config;
   },
   function(error) {
     // Do something with request error
 
-    console.log( 'an error before!', error );
+    console.error( 'an error before!', error );
 
     return Promise.reject(error);
   }
@@ -29,7 +29,7 @@ axios.interceptors.response.use(
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
 
-    console.log( 'the response after!', response );
+    // console.log( 'the response after!', response );
 
     return response;
   },
@@ -37,7 +37,7 @@ axios.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
 
-    console.log( 'response!', error.response );
+    console.error( 'error response!', error.response );
 
     if( [ 401, 419 ].includes( error.response.status ) ){
       // auth is invalid, also session expired sends this & csrf mismatch
@@ -59,9 +59,8 @@ axios.get( "/sanctum/csrf-cookie" )
     axios.get( '/api/getme' )
       .then( res => {
 
-        console.log( 'the thaaaaang', res );
-        store.dispatch( 'auth/setUser', res.data );
-        store.dispatch( 'alerts/addMessage', { type: 'info', msg: 'Welcome to MetaLevel' });
+        store.dispatch( 'auth/setUser', res.data.data );
+        store.dispatch( 'alerts/addMessage', { type: 'info', msg: 'Welcome to Stonks' });
         store.dispatch( 'auth/setAuth', 1 );
       })
       .catch( () => {
