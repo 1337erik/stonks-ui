@@ -2,7 +2,8 @@
 
     <main id="main-container" :class=" sidenavClass " class="scrollyboi">
 
-        <b-container>
+        <b-container fluid>
+
             <transition name="slide-fade" mode="out-in">
 
                 <keep-alive>

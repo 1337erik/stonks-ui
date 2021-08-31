@@ -20,6 +20,32 @@ export default [
     }
   },
   {
+    path: "/farms",
+    name: "farms",
+    component: () => import( /* webpackChunkName: "farms" */ '../views/features/Farms.vue' ),
+    meta: {
+
+      authGuard : true,
+      onTopnav  : false,
+      onSidenav : true,
+      placement : 22,
+      icon      : 'tree',
+    }
+  },
+  {
+    path: "/coins",
+    name: "coins",
+    component: () => import( /* webpackChunkName: "farms" */ '../views/features/Coins.vue' ),
+    meta: {
+
+      authGuard : true,
+      onTopnav  : false,
+      onSidenav : true,
+      placement : 33,
+      icon      : 'wallet',
+    }
+  },
+  {
     path: "/settings",
     name: "settings",
     component: () => import( /* webpackChunkName: "settings" */ '../views/features/Settings.vue' ),

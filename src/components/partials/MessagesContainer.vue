@@ -1,6 +1,6 @@
 <template>
 
-    <div id="messages-outer-container" class="scrollyboi">
+    <div id="messages-outer-container" class="scrollyboi" :style="{ 'top' : ( messages.length == 0 ? '-50%' : '0' ) }">
 
       <transition-group name="message-animation" tag="div" @before-leave=" beforeLeave " class="d-flex flex-column align-items-end" id="messages-inner-container">
 

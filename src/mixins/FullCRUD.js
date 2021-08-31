@@ -21,7 +21,7 @@ export default {
                 // },
             ],
 
-            sortBy      : 'lastname',
+            sortBy      : 'id',
             sortDesc    : false,
 
             pagination  : {
@@ -84,7 +84,7 @@ export default {
 
             this.loading = true;
             this.form.alertOnResponse = false;
-            this.form.get( `/api/${this.baseUrl}${this.combinedFilters}${this.paginationControls}${this.sortControls}` )
+            this.form.get( `${this.baseUrl}${this.combinedFilters}${this.paginationControls}${this.sortControls}` )
                 .then( ({ data }) => {
 
                     console.log( 'hey penis lol', data.aggregates.total, data.results );
@@ -102,7 +102,7 @@ export default {
 
             if( !id ) return;
 
-            this.form.delete( `/api/${this.baseUrl}/${id}` )
+            this.form.delete( `${this.baseUrl}/${id}` )
                 .then( ({ data }) => {
 
                     console.log( 'hey penis lol', data );
